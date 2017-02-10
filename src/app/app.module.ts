@@ -32,7 +32,7 @@
 // IONIC
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 /****************/
 /*  NG MODULES  */
@@ -124,7 +124,8 @@ const components = [
 ];
 
 const providers = [
-    FormBuilder
+    FormBuilder,
+    Storage
 ];
 
 @NgModule({

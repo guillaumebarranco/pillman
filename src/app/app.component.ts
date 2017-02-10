@@ -72,9 +72,11 @@ export class AppComponent {
 
             this.majService.getLastVersion().subscribe(response => {
 
-                if(version.version !== response.json().version) {
-                    this.majToDo = true;
-                }
+                this.majToDo = true;
+
+                // if(version.version !== response.json().version) {
+                //     this.majToDo = true;
+                // }
             });
         });
     }

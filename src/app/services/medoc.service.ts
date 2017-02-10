@@ -11,7 +11,7 @@ export class MedocService {
 	constructor(public http: Http) {
 		// this.apiUrl = "http://localhost/medoc/serveur.php?function=getMedocs&limit=10";
 		// this.apiUrl = './../assets/files/min/';
-		this.apiUrl = "http://92.222.34.194/medoc/serveur.php?function=getMedocs&limit=10";
+		this.apiUrl = "http://92.222.34.194/medoc/serveur.php?function=getMedocs&limit=15000";
 	}
 
 	public getMedocs(which) : Observable<Response> {
