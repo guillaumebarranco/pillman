@@ -1,0 +1,13 @@
+<div *ngIf="elements[0]">
+	<div *ngIf="searchType == 'name'" class="card-title"><strong>Nom</strong> {{medoc.name}}</div>
+	<div class="card-subtitle"><strong>DCI</strong> {{medoc.denomination}}</div>
+	<div class="card-subtitle"><strong>Forme</strong> {{medoc.forme}}</div>
+
+	<div class="card-subtitle"><strong>Effets secondaires</strong>
+
+		<div *ngIf="!showAllEffects" [innerHTML]="getShortEffects(medoc.side_effect)"></div>
+		<button *ngIf="!showAllEffects" (click)="seeAllDetails()">Voir les détails</button>
+
+		<div *ngIf="showAllEffects" [innerHTML]="medoc.side_effect"></div>
+	</div>
+</div>

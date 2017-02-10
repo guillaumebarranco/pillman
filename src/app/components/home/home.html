@@ -1,0 +1,18 @@
+<!-- <pillman></pillman> -->
+
+<filter-typesearch [searchType]="searchType" (changeSearchType)="changeSearchType($event)"></filter-typesearch>
+<!-- <my-filter ></my-filter> -->
+
+<search-element [hidden]="!researchDone" (changeResearch)="changeResearch($event)"></search-element>
+
+<aftersearch-element
+	[hidden]="researchDone"
+	[elements]="elements"
+	[search]="search"
+	[researchDone]="researchDone"
+	(changeResearchDone)="changeResearchDone($event)"
+></aftersearch-element>
+
+<!-- <autocomplete-element [hidden]="!researchDone" [elements]="elements" [medoc]="medoc"></autocomplete-element> -->
+
+<card-element [hidden]="!researchDone" [searchType]="searchType" [elements]="elements" [medoc]="medoc"></card-element>

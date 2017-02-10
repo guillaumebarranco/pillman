@@ -1,0 +1,541 @@
+$maincolor: #F26F70;
+$secondcolor: #445566;
+$mainfont: "Open Sans";
+$secondfont: "Oswald";
+
+/******************/
+/*    GENERAL     */
+/******************/
+
+* {box-sizing: border-box;}
+
+@font-face {
+	font-family: $mainfont;
+	src: "../fonts/webfonts/opensans_regular_macroman/OpenSans-Regular-webfont.svg";
+}
+
+body {
+	font-family: $mainfont, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2 {
+	font-family: $secondfont, sans-serif;
+}
+
+button {
+	background-color: $secondcolor;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 1em;
+}
+
+.wrapper {
+	width: 100%;
+	max-width: 320px;
+	margin: 0 auto;
+}
+
+medocteur {
+	color: #fff;
+	display: block;
+	height: 100%;
+	overflow: hidden;
+}
+
+page-home {
+	position: relative;
+}
+
+.page {
+	margin: 0 auto;
+	background-color: #F26F70;
+	padding: 20px;
+	display: block;
+	height: 100%;
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+/******************/
+/*      MENU      */
+/******************/
+
+my-menu {
+
+	background-color: $maincolor;
+
+	&.dark {
+		background-color: #000;
+	}
+
+	width: 100%;
+    height: 200px;
+    padding-top: 50px;
+    z-index: 2;
+    display: block;
+
+	/* Basic Config
+	 * $nav-size (px) sets the size of the menu button
+	 * $nav-color (#) is set the be the main color when a background is set
+	 * $nav-color-active (#) is the color of the button when toggled. If theres no background, it is also the main color when untoggled
+	 * $hasBackground (boolean) sets whether there's a background or not.
+	 */
+
+	$nav-size: 50px;
+	$nav-color: #fff;
+	$nav-color-active: $secondcolor;
+	$hasBackground: false;
+
+	// Advanced Config
+	$animation-time: 300ms;
+	$animation-easing: ease-in-out;
+
+	$z-index-navigation-button: 500;
+	$z-index-navigation-inner: $z-index-navigation-button + 25;
+
+	@if $hasBackground == false {
+		$nav-color: $nav-color-active;
+	}
+
+	.material--burger {
+		cursor: pointer;
+		padding: ($nav-size / 4);
+		position: relative;
+		width: $nav-size;
+		height: $nav-size;
+
+	@if $hasBackground == true {
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: $nav-color-active;
+			animation: material-menu-background $animation-time $animation-easing forwards;
+		}
+	}
+
+		span {
+			top: 50%;
+			transform-origin: center center;
+			animation-name: material-menu;
+
+			&, &:before, &:after {
+				width: ($nav-size / 2);
+
+				background-color: $nav-color;
+				height: ceil($nav-size / 20);
+				position: absolute;
+				z-index: $z-index-navigation-inner;
+				animation-duration: $animation-time;
+				animation-fill-mode: forwards;
+				animation-timing-function: $animation-easing;
+				transition: background-color $animation-time $animation-easing;
+			}
+
+			&:before, &:after {
+				content: '';
+				display: block;
+			}
+
+			&:before {
+				top: 300%;
+				transform-origin: right bottom;
+				animation-name: material-menu-before;
+			}
+
+			&:after {
+				bottom: 300%;
+				transform-origin: right top;
+				animation-name: material-menu-after;
+			}
+		}
+
+		&.material--arrow {
+		@if $hasBackground == true {
+			&:after {
+				animation: material-arrow-background $animation-time $animation-easing forwards;
+			}
+		}
+
+			span, span:before, span:after {
+				animation-duration: $animation-time;
+				animation-fill-mode: forwards;
+				animation-timing-function: $animation-easing;
+				background-color: $nav-color-active;
+			}
+			span 		{animation-name: material-arrow;}
+			span:before {animation-name: material-arrow-before;}
+			span:after 	{animation-name: material-arrow-after;}
+		}
+	}
+
+	@if $hasBackground == true {
+	  @keyframes material-arrow-background {
+	    100% 	{ transform: rotate(180deg) scale(0); }
+	  }
+
+	  @keyframes material-menu-background {
+	    0% 		{ transform: rotate(180deg) scale(0); }
+	    100% 	{ transform: rotate(360deg) scale(1); }
+	  }
+	}
+
+	@keyframes material-arrow {
+		100% 	{ transform: rotate(180deg); }
+	}
+
+	@keyframes material-arrow-before {
+		100% 	{ top: 0; transform: rotate(-40deg) scaleX(0.7); }
+	}
+
+	@keyframes material-arrow-after {
+		100% 	{ bottom: 0; transform: rotate(40deg) scaleX(0.7);}
+	}
+
+	@keyframes material-menu {
+		0% 		{ transform: rotate(180deg); }
+		100% 	{ transform: rotate(360deg); }
+	}
+
+	@keyframes material-menu-before {
+		0% 		{ top: 0; 		transform: rotate(-40deg) scaleX(0.7); }
+		100% 	{ top: 300%; 	transform: rotate(0) scaleX(1); }
+	}
+
+	@keyframes material-menu-after {
+		0% 		{ bottom: 0; 	transform: rotate(40deg) scaleX(0.7); }
+		100% 	{ bottom: 300%; transform: rotate(0) scaleX(1); }
+	}
+
+	.material--burger {
+		margin: 90px auto;
+	}
+}
+
+my-filter {
+
+	/* Basic Config
+	 * $nav-size (px) sets the size of the menu button
+	 * $nav-color (#) is set the be the main color when a background is set
+	 * $nav-color-active (#) is the color of the button when toggled. If theres no background, it is also the main color when untoggled
+	 * $hasBackground (boolean) sets whether there's a background or not.
+	 */
+
+	$nav-size: 50px;
+	$nav-color: #fff;
+	$nav-color-active: $secondcolor;
+	$hasBackground: false;
+
+	// Advanced Config
+	$animation-time: 300ms;
+	$animation-easing: ease-in-out;
+
+	$z-index-navigation-button: 500;
+	$z-index-navigation-inner: $z-index-navigation-button + 25;
+
+	@if $hasBackground == false {
+		$nav-color: $nav-color-active;
+	}
+
+	.material--burger {
+		cursor: pointer;
+		padding: ($nav-size / 4);
+		position: relative;
+		width: $nav-size;
+		height: $nav-size;
+	  
+	@if $hasBackground == true {
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: $nav-color-active;
+			animation: material-menu-background $animation-time $animation-easing forwards;
+		}
+	}
+
+		span.first {
+			top: 50%;
+			transform-origin: center center;
+			animation-name: material-menu;
+
+			&, &:before, &:after {
+				width: ($nav-size / 2);
+
+				background-color: $nav-color;
+				height: ceil($nav-size / 20);
+				position: absolute;
+				z-index: $z-index-navigation-inner;
+				animation-duration: $animation-time;
+				animation-fill-mode: forwards;
+				animation-timing-function: $animation-easing;
+				transition: background-color $animation-time $animation-easing;
+			}
+
+			&:before, &:after {
+				content: '';
+				display: block;
+			}
+
+			&:before {
+				top: 300%;
+				transform-origin: right bottom;
+				animation-name: material-menu-before;
+			}
+
+			&:after {
+				bottom: 300%;
+				transform-origin: right top;
+				animation-name: material-menu-after;
+			}
+		}
+
+		span.second {
+			top: 50%;
+			transform-origin: center center;
+			animation-name: material-menu;
+
+			&, &:before, &:after {
+				width: ($nav-size / 2);
+
+				background-color: $nav-color;
+				height: ceil($nav-size / 20);
+				position: absolute;
+				z-index: $z-index-navigation-inner;
+				animation-duration: $animation-time;
+				animation-fill-mode: forwards;
+				animation-timing-function: $animation-easing;
+				transition: background-color $animation-time $animation-easing;
+			}
+
+			&:before, &:after {
+				content: '';
+				display: block;
+			}
+
+			&:before {
+				top: 300%;
+				transform-origin: right bottom;
+				animation-name: material-menu-before;
+			}
+
+			&:after {
+				bottom: 300%;
+				transform-origin: right top;
+				animation-name: material-menu-after;
+			}
+		}
+
+		&.material--arrow {
+		@if $hasBackground == true {
+			&:after {
+				animation: material-arrow-background $animation-time $animation-easing forwards;
+			}
+		}
+
+			span.first, span.first:before, span.first:after {
+				animation-duration: $animation-time;
+				animation-fill-mode: forwards;
+				animation-timing-function: $animation-easing;
+				background-color: $nav-color-active;
+			}
+			span.first 		{animation-name: material-arrow;}
+			span.first:before {animation-name: material-arrow-before;}
+			span.first:after 	{animation-name: material-arrow-after;}
+		}
+	}
+
+	@if $hasBackground == true {
+	  @keyframes material-arrow-background {
+	    100% 	{ transform: rotate(180deg) scale(0); }
+	  }
+
+	  @keyframes material-menu-background {
+	    0% 		{ transform: rotate(180deg) scale(0); }
+	    100% 	{ transform: rotate(360deg) scale(1); }
+	  }
+	}
+
+	@keyframes material-arrow {
+		100% 	{ transform: rotate(180deg); }
+	}
+
+	@keyframes material-arrow-before {
+		100% 	{ top: 0; transform: rotate(-40deg) scaleX(0.7); }
+	}
+
+	@keyframes material-arrow-after {
+		100% 	{ bottom: 0; transform: rotate(40deg) scaleX(0.7);}
+	}
+
+	@keyframes material-menu {
+		0% 		{ transform: rotate(180deg); }
+		100% 	{ transform: rotate(360deg); }
+	}
+
+	@keyframes material-menu-before {
+		0% 		{ top: 0; 		transform: rotate(-40deg) scaleX(0.7); }
+		100% 	{ top: 300%; 	transform: rotate(0) scaleX(1); }
+	}
+
+	@keyframes material-menu-after {
+		0% 		{ bottom: 0; 	transform: rotate(40deg) scaleX(0.7); }
+		100% 	{ bottom: 300%; transform: rotate(0) scaleX(1); }
+	}
+
+	.material--burger {
+		margin: 90px auto;
+		margin-top: 0;
+	}
+}
+
+.menu {
+	position: absolute;
+	top: 0;
+	left: -200px;
+	transition: 0.4s;
+	width: 200px;
+	font-size: 3.5em;
+    background: darken($maincolor, 15%);
+    height: 100%;
+    z-index: 5;
+    box-sizing: border-box;
+
+    &.show {
+		left: 0;
+		animation: toRight 0.4s ease-in-out;
+	}
+
+	&.hide {
+		left: -200px;
+		animation: toLeft 0.4s ease-in-out;
+	}
+
+    div {
+		padding-left: 5px;
+	}
+}
+
+@keyframes toRight {
+
+	from { left: -200px; }
+	to { left: 0; }
+}
+
+@keyframes toLeft {
+
+	from { left: 0; }
+	to { left: -200px; }
+}
+
+/******************/
+/*      HOME      */
+/******************/
+
+select {
+	width: 100%;
+}
+
+.card-title, .card-subtitle {
+	margin-top: 10px;
+}
+
+.card-subtitle {
+
+	strong {
+		border: solid 1px #fff;
+	    padding: 3px;
+	    display: block;
+	    text-align: center;
+	    margin-bottom: 10px;
+	}
+
+	button {
+		margin-top: 10px;
+	}
+}
+
+input, .ng2-auto-complete {
+	color: #000;
+	width: 100%;
+}
+
+.mainInput {
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.filter {
+	background-image: url('../img/filter.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+my-filter {
+	position: absolute;
+    top: 0;
+    right: 0;
+}
+
+filter-typesearch {
+	position: absolute;
+    top: -100px;
+    right: 20px;
+}
+
+.menu-filter {
+	position: absolute;
+	top: 0;
+	right: -200px;
+	transition: 0.4s;
+	width: 200px;
+	font-size: 3.5em;
+    background: darken($maincolor, 15%);
+    height: 100%;
+    z-index: 5;
+    box-sizing: border-box;
+
+    &.show {
+		right: 0;
+		animation: toLeft 0.4s ease-in-out;
+	}
+
+	&.hide {
+		right: -200px;
+		animation: toRight 0.4s ease-in-out;
+	}
+
+    div {
+		padding-left: 5px;
+	}
+}
+
+@keyframes toLeft {
+
+	from { right: -200px; }
+	to { right: 0; }
+}
+
+@keyframes toRight {
+
+	from { right: 0; }
+	to { right: -200px; }
+}

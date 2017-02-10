@@ -1,0 +1,6 @@
+<h2>Recherches récentes</h2>
+
+<div class="recentResearch" *ngFor="let medoc of recentResearch">
+	{{medoc.name}} <br />
+	<button (click)="changeResearch(medoc)">Voir la fiche</button>
+</div>
