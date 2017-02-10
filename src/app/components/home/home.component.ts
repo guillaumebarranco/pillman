@@ -54,6 +54,9 @@ export class HomePage {
 		this.medocService.getMedocs('a').subscribe(medocs => {
 			this.hideLoader();
 
+			console.log(medocs);
+			console.log(medocs.json());
+
 			// this.elements = this.formateMedocs(medocs.json());
 			this.elements = this.formateMedocs(medocs.json().slice(0, 15));
 			// console.log(this.elements);
