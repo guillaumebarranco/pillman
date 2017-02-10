@@ -9,7 +9,7 @@ export class MajService {
 	apiUrl: any;
 
 	constructor(public http: Http) {
-		this.apiUrl = "http://localhost/medoc/serveur.php?function=getMedocsVersion";
+		this.apiUrl = "http://92.222.34.194/medoc/serveur.php?function=getMedocsVersion";
 	}
 
 	public getLastVersion() : Observable<Response> {
