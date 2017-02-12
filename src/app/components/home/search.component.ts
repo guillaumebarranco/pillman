@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MedocService } from './../../services/medoc.service';
 
 @Component({
 	selector: 'search-element',

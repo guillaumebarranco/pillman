@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { MedocService } from './../../services/medoc.service';
+import { ApiService } from './../../services/api.service';
 
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.html',
-	providers: [MedocService],
+	providers: [ApiService],
 	styles: [`
 
 		filter-typesearch {
@@ -34,7 +34,7 @@ export class HomePage {
 	elementList: any;
 	labos: any;
 
-	constructor(private medocService: MedocService) {
+	constructor(private apiService: ApiService) {
 
 		this.setSearchType();
 		this.elements = [];
@@ -51,7 +51,7 @@ export class HomePage {
 
 	getMedocs() {
 
-		this.medocService.getMedocs('a').subscribe(medocs => {
+		this.apiService.getMedocs().subscribe(medocs => {
 			this.hideLoader();
 
 			// console.log(medocs);
@@ -232,10 +232,6 @@ export class HomePage {
 	}
 
 	// GETTERS
-
-	private getMedoc() {
-		return this.medoc;
-	}
 
 	private getRecentResearch() {
 

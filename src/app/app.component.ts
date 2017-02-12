@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { MajService } from './services/maj.service';
+import { ApiService } from './services/api.service';
 
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
@@ -34,7 +34,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
             color: #000;
         }
     `],
-    providers: [MajService]
+    providers: [ApiService]
 })
 
 export class AppComponent {
@@ -44,7 +44,7 @@ export class AppComponent {
     theme: string = "default-theme";
     majToDo: boolean = false;
 
-    constructor(platform: Platform, private majService: MajService) {
+    constructor(platform: Platform, private apiService: ApiService) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -70,7 +70,7 @@ export class AppComponent {
 
         this.getLastMedocsVersion((version) => {
 
-            this.majService.getLastVersion().subscribe(response => {
+            this.apiService.getLastVersion().subscribe(response => {
 
                 this.majToDo = true;
 

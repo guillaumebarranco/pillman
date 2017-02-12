@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MedocService } from './../../services/medoc.service';
+import { ApiService } from './../../services/api.service';
 
 @Component({
 	selector: 'aftersearch-element',
 	templateUrl: './aftersearch.html',
-	providers: [MedocService],
+	providers: [ApiService],
 	styles: [`
 		
 		li {
@@ -24,7 +24,7 @@ export class AftersearchComponent {
 
 	propos: any = [];
 
-	constructor(private medocService: MedocService) {
+	constructor(private apiService: ApiService) {
 
 		var interval = setInterval(() => {
 
@@ -46,7 +46,8 @@ export class AftersearchComponent {
 
 		var which = this.search.substr(0,1).toLowerCase();
 
-		this.medocService.getMedocs(which).subscribe(medocs => {
+		this.apiService.getMedocs().subscribe(medocs => {
+			// this.apiService.getMedocs(which).subscribe(medocs => {
 			this.elements = medocs.json();
 
 			for(var element of this.elements) {
