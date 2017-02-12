@@ -14,7 +14,7 @@ export class ApiService {
 		this.baseUrl = "http://92.222.34.194/medoc/serveur.php";
 
 		this.apiUrl = this.baseUrl+"?function=getMedocs&limit=100";
-		this.apiUrl = this.baseUrl+"?function=getMedocsVersion";
+		this.apiUrlMaj = this.baseUrl+"?function=getMedocsVersion";
 	}
 
 	public getMedocs() : Observable<Response> {

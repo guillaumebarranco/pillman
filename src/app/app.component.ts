@@ -55,6 +55,8 @@ export class AppComponent {
 
     ngOnInit() {
 
+        console.log('before check maj');
+
         this.checkMaj();
 
         this.medoc = {};
@@ -68,17 +70,17 @@ export class AppComponent {
 
     checkMaj() {
 
-        this.getLastMedocsVersion((version) => {
+        // this.getLastMedocsVersion((version) => {
 
-            this.apiService.getLastVersion().subscribe(response => {
+        //     this.apiService.getLastVersion().subscribe(response => {
 
                 this.majToDo = true;
 
                 // if(version.version !== response.json().version) {
                 //     this.majToDo = true;
                 // }
-            });
-        });
+        //     });
+        // });
     }
 
     getLastMedocsVersion(callback) {

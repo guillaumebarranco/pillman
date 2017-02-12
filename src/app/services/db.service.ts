@@ -1,12 +1,9 @@
 import { SQLite } from 'ionic-native';
-import { ApiService } from './api.service';
 
 export class DBService {
 	medocs: any;
 
-	constructor(private apiService: ApiService) {
-
-	}
+	constructor() {}
 
 	getDB() {
 		return SQLite.openDatabase({
@@ -15,46 +12,31 @@ export class DBService {
 		});
 	}
 
-	getMedocs() {
-
-		return new Promise((resolve, reject) => {
-
-			this.apiService.getMedocs().subscribe(medocs => {
-				resolve(medocs.json());
-			});
-		});
-	}
-
-	makeMaj(callback) {
+	makeMaj(medocs, callback) {
 		this.medocs = [];
 
 		this.getDB().then((db: SQLite) => {
 
-			this.getMedocs().then((medocs) => {
+			this.deleteTable(db, (response) => {
 
-				console.log(medocs);
+				this.handleMedocTable(db, medocs, (response) => {
 
-				this.deleteTable(db, (response) => {
+					if(response.data.rows.length > 0) {
+						this.medocs = [];
 
-					this.handleMedocTable(db, medocs, (response) => {
+						for(let i = 0; i < response.data.rows.length; i++) {
 
-						if(response.data.rows.length > 0) {
-							this.medocs = [];
-
-							for(let i = 0; i < response.data.rows.length; i++) {
-
-								this.medocs.push({
-									"name": response.data.rows.item(i).name,
-									"cis": response.data.rows.item(i).cis,
-									"denomination": response.data.rows.item(i).denomination,
-									"side_effect": response.data.rows.item(i).side_effect,
-									"forme": response.data.rows.item(i).forme
-								});
-							}
+							this.medocs.push({
+								"name": response.data.rows.item(i).name,
+								"cis": response.data.rows.item(i).cis,
+								"denomination": response.data.rows.item(i).denomination,
+								"side_effect": response.data.rows.item(i).side_effect,
+								"forme": response.data.rows.item(i).forme
+							});
 						}
 
 						callback(this.medocs);
-					});
+					}
 				});
 			});
 		});

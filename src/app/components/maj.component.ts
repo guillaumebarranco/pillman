@@ -20,12 +20,12 @@ declare var Connection: any;
 		</ul>
 	`,
 	styles: [`
-		
+
 		div {
 			color: black;
 		}
 	`],
-	providers: [ApiService]
+	providers: [ApiService, DBService]
 })
 
 export class MajComponent {
@@ -46,12 +46,25 @@ export class MajComponent {
 
 		console.log('begin maj');
 
-		this.dbService.makeMaj((response) => {
+		this.getMedocs().then((medocs) => {
 
-			console.log('end maj');
+			this.dbService.makeMaj(medocs, (response) => {
 
-			this.medocs = response;
-			this.majDone = true;
+				this.medocs = response;
+				this.majDone = true;
+
+				console.log('end maj', this.medocs);
+			});
+		});
+	}
+
+	getMedocs() {
+
+		return new Promise((resolve, reject) => {
+
+			this.apiService.getMedocs().subscribe(medocs => {
+				resolve(medocs.json());
+			});
 		});
 	}
 
@@ -73,6 +86,8 @@ export class MajComponent {
         states[Connection.CELL]     = 'Cell generic connection';
         states[Connection.NONE]     = 'No network connection';
 
-        console.log(states[networkState]);
+        if(networkState === Connection.WIFI) {
+        	console.log('is wifi');
+        }
     }
 }
