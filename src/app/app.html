@@ -1,1 +1,47 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-content>
+    
+    <!-- Component handling MAJ (Updates from API) -->
+    <maj-element 
+        *ngIf="majToDo">
+    </maj-element>
+    
+    <!-- Component handling menu, displaying on all principal pages -->
+    <my-menu
+        class="{{theme}}" 
+        *ngIf="!majToDo" 
+        [currentPage]="currentPage" 
+        (pageChange) = pageChange($event)
+    >
+    </my-menu>
+
+    <!--<pillman-element></pillman-element>-->
+    
+    <!-- Main App Component, displaying the form and the medocs results -->
+    <page-home
+        class="page {{theme}}" 
+        *ngIf="!majToDo" 
+        [hidden]="handlePage('home')" 
+        [medoc]="medoc"
+    >
+    </page-home>
+    
+    <!-- Component handling user recent researches -->
+    <page-recent 
+        class="page {{theme}}" 
+        *ngIf="!majToDo"
+        [hidden]="handlePage('recent')" 
+        [medoc]="medoc" 
+        (medocChange) = medocChange($event)>
+    > 
+    </page-recent>
+    
+    <!-- Component handling App options and customization for the user -->
+    <page-options 
+        class="page {{theme}}" 
+        *ngIf="!majToDo" 
+        [hidden]="handlePage('options')" 
+        [theme]="theme" 
+        (changeTheme) = changeTheme($event)
+    >
+    </page-options>
+</ion-content>

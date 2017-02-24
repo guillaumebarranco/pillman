@@ -69,7 +69,6 @@ const modules = [
     AngularFireModule.initializeApp(firebaseConfig)
 ];
 
-
 const components = [
     AppComponent,
     RecentPage,

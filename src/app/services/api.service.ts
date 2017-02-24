@@ -24,4 +24,10 @@ export class ApiService {
 	public getLastVersion() : Observable<Response> {
 		return this.http.get(this.apiUrlMaj);
 	}
+
+	public getAppDatas() : Observable<Response> {
+		var test = this.http.get('assets/content/app.json');
+		console.log(test);
+		return test;
+	}
 }
