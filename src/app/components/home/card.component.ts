@@ -1,6 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-import { MedocService } from './../../services/medoc.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'card-element',

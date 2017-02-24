@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from './../services/api.service';
 import { DBService } from './../services/db.service';
-import { Alert, Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 
 declare var navigator: any;
 declare var Connection: any;

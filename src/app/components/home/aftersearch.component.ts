@@ -26,7 +26,7 @@ export class AftersearchComponent {
 
 	constructor(private apiService: ApiService) {
 
-		var interval = setInterval(() => {
+		setInterval(() => {
 
 			if(!this.researchDone && this.matchDone) {
 				this.matchDone = false;
@@ -44,7 +44,7 @@ export class AftersearchComponent {
 
 	launchMatch() {
 
-		var which = this.search.substr(0,1).toLowerCase();
+		// var which = this.search.substr(0,1).toLowerCase();
 
 		this.apiService.getMedocs().subscribe(medocs => {
 			// this.apiService.getMedocs(which).subscribe(medocs => {
