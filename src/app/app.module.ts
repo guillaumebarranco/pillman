@@ -12,8 +12,6 @@ import { Storage } from '@ionic/storage';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from "@angular/forms";
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 // import { IonicApp, IonicModule } from 'ionic-angular';
 
@@ -48,7 +46,6 @@ import { AftersearchComponent } from './components/home/aftersearch.component';
 import { AutocompleteComponent } from './components/home/autocomplete.component';
 import { CardComponent } from './components/home/card.component';
 
-import { FormComponent } from './components/form.component';
 import { MajComponent } from './components/maj.component';
 
 /*****************/
@@ -69,8 +66,6 @@ const modules = [
     HttpModule,
     UiSwitchModule,
     Ng2AutoCompleteModule,
-    FormsModule,
-    ReactiveFormsModule ,
     AngularFireModule.initializeApp(firebaseConfig)
 ];
 
@@ -89,12 +84,10 @@ const components = [
     AftersearchComponent,
     AutocompleteComponent,
     CardComponent,
-    MajComponent,
-    FormComponent
+    MajComponent
 ];
 
 const providers = [
-    FormBuilder,
     Storage
 ];
 
