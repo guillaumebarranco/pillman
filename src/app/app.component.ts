@@ -36,8 +36,7 @@ export class AppComponent {
 
         this.medoc = {};
         this.apiService.getAppDatas().subscribe((response) => {
-            console.log(response);
-            this.app = response;
+            this.app = response.json();
         });
 
         this.theme = this.getTheme();
@@ -45,23 +44,27 @@ export class AppComponent {
 
     checkMaj() {
 
-        // this.getLastMedocsVersion((version) => {
+        this.getAppLastMedocsVersion((appVersion) => {
 
-        //     this.apiService.getLastVersion().subscribe(response => {
+            console.log('appVersion', appVersion.json());
+
+            this.apiService.getLastVersion().subscribe((apiVersion) => {
+
+                console.log('apiVersion', apiVersion.json());
 
                 this.majToDo = true;
 
                 // if(version.version !== response.json().version) {
                 //     this.majToDo = true;
                 // }
-        //     });
-        // });
+            });
+        });
     }
 
-    getLastMedocsVersion(callback) {
-        // TODO read in assets/files/version.json with ionic
-
-        callback({version: "0.0.0"});
+    getAppLastMedocsVersion(callback) {
+        this.apiService.getAppLastMedocsVersion().subscribe(response => {
+            callback(response);
+        });
     }
 
     /************************/

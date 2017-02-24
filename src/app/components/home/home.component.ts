@@ -158,8 +158,6 @@ export class HomePage {
 		} else {
 			this.searchType = "name";
 		}
-
-		console.log(this.searchType);
 	}
 
 	public setRecentResearch(recent) {
