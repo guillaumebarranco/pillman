@@ -22,7 +22,6 @@
     "@ionic/storage": "^1.1.9",
     "angular2-ui-switch": "^1.2.0",
     "angularfire2": "^2.0.0-beta.7",
-    "eslint": "^3.16.1",
     "firebase": "^3.6.10",
     "ionic-angular": "2.0.1",
     "ionic-native": "2.4.1",
@@ -35,7 +34,8 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",
-    "typescript": "2.0.9"
+    "tslint": "^4.4.2",
+    "typescript": "^2.0.9"
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
