@@ -10,11 +10,24 @@ export class ApiService {
 	apiUrl: string;
 	apiUrlMaj: string;
 
-	constructor(public http: Http) {
-		this.baseUrl = "http://92.222.34.194/medoc/serveur.php";
+	constructor(public http: Http) {}
 
-		this.apiUrl = this.baseUrl+"?function=getMedocs&limit=100";
-		this.apiUrlMaj = this.baseUrl+"?function=getMedocsVersion";
+	ngOnInit() {
+		var env = "dev";
+
+		this.getBaseUrl().subscribe((response) => {
+
+			response = response.json();
+
+			this.baseUrl = response[env].apiUrl;
+
+			this.apiUrl = this.baseUrl+"?function=getMedocs&limit=100";
+			this.apiUrlMaj = this.baseUrl+"?function=getMedocsVersion";
+		});
+	}
+
+	public getBaseUrl() : Observable<Response> {
+		return this.http.get('assets/config/config.json');
 	}
 
 	public getMedocs() : Observable<Response> {
@@ -26,8 +39,6 @@ export class ApiService {
 	}
 
 	public getAppDatas() : Observable<Response> {
-		var test = this.http.get('assets/content/app.json');
-		console.log(test);
-		return test;
+		return this.http.get('assets/content/app.json');
 	}
 }

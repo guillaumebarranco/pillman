@@ -1,0 +1,8 @@
+{
+	"dev": {
+		"apiUrl": "http://localhost/medoc/serveur.php"
+	},
+	"prod": {
+		"apiUrl": "http://92.222.34.194/medoc/serveur.php"
+	}
+}
