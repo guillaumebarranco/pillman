@@ -1,42 +1,13 @@
-// import { NgModule, ErrorHandler } from '@angular/core';
-// import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-// import { MyApp } from './app.component';
-// import { AboutPage } from '../pages/about/about';
-// import { ContactPage } from '../pages/contact/contact';
-// import { HomePage } from '../pages/home/home';
-// import { TabsPage } from '../pages/tabs/tabs';
+/*****************/
+/* IONIC MODULES */
+/*****************/
 
-// @NgModule({
-//   declarations: [
-//     MyApp,
-//     AboutPage,
-//     ContactPage,
-//     HomePage,
-//     TabsPage
-//   ],
-//   imports: [
-//     IonicModule.forRoot(MyApp)
-//   ],
-//   bootstrap: [IonicApp],
-//   entryComponents: [
-//     MyApp,
-//     AboutPage,
-//     ContactPage,
-//     HomePage,
-//     TabsPage
-//   ],
-//   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
-// })
-// export class AppModule {}
-
-// IONIC
-
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-/****************/
-/*  NG MODULES  */
-/****************/
+/*****************/
+/*   NG MODULES  */
+/*****************/
 
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -50,7 +21,6 @@ import { AngularFireModule } from 'angularfire2';
 /*  EXT MODULES  */
 /*****************/
 
-import { Ng2CompleterModule } from "ng2-completer";
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 // import { Typeahead } from 'ng2-typeahead';
 import { UiSwitchModule } from 'angular2-ui-switch';
