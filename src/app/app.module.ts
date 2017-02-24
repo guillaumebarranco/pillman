@@ -35,7 +35,7 @@ import { HomePage } from './components/home/home.component';
 
 // import { SlidesComponent } from './components/slides.component';
 import { SlidesComponent } from './components/fakeSlides.component';
-import { MenuComponent } from './components/menu.component';
+import { MenuComponent } from './components/utils/menu.component';
 import { FilterComponent } from './components/filter.component';
 import { TypesearchComponent } from './components/filters/typesearch.component';
 
@@ -46,7 +46,7 @@ import { AftersearchComponent } from './components/home/aftersearch.component';
 import { AutocompleteComponent } from './components/home/autocomplete.component';
 import { CardComponent } from './components/home/card.component';
 
-import { MajComponent } from './components/maj.component';
+import { MajComponent } from './components/maj/maj.component';
 
 /*****************/
 /*     CONFIG    */

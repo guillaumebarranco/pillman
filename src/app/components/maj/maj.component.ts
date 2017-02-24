@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiService } from './../services/api.service';
-import { DBService } from './../services/db.service';
+import { ApiService } from './../../services/api.service';
+import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
 
 declare var navigator: any;
@@ -74,20 +74,26 @@ export class MajComponent {
 
 	checkNetwork() {
 
-        const networkState = navigator.connection.type;
-        const states = {};
+		if(navigator && navigator.connection) {
 
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
+	        const networkState = navigator.connection.type;
+	        const states = {};
 
-        if(networkState === Connection.WIFI) {
-        	console.log('is wifi');
-        }
+	        states[Connection.UNKNOWN]  = 'Unknown connection';
+	        states[Connection.ETHERNET] = 'Ethernet connection';
+	        states[Connection.WIFI]     = 'WiFi connection';
+	        states[Connection.CELL_2G]  = 'Cell 2G connection';
+	        states[Connection.CELL_3G]  = 'Cell 3G connection';
+	        states[Connection.CELL_4G]  = 'Cell 4G connection';
+	        states[Connection.CELL]     = 'Cell generic connection';
+	        states[Connection.NONE]     = 'No network connection';
+
+	        if(networkState === Connection.WIFI) {
+	        	console.log('is wifi');
+	        }
+
+		} else {
+			console.log("You are not on a device which can detect you Internet connection");
+		}
     }
 }
