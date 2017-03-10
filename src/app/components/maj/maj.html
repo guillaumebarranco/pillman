@@ -1,10 +1,13 @@
-<div>Une mise à jour est disponible</div>
+<div class="page">
+	
+	<h2>Une mise à jour est disponible</h2>
 
-<button (click)="makeMaj(true)">Faire la mise à jour</button>
-<button (click)="makeMaj(false)">Une prochaine fois</button>
+	<button (click)="makeMaj(true)">Faire la mise à jour</button>
+	<button (click)="makeMaj(false)">Une prochaine fois</button>
 
-<div *ngIf="!majDone && majStarted">En cours...</div>
+	<div *ngIf="!majDone && majStarted">En cours...</div>
 
-<ul>
-	<li *ngFor="let medoc of medocs">{{medoc.name}}</li>
-</ul>
+	<ul>
+		<li *ngFor="let medoc of medocs">{{medoc.name}}</li>
+	</ul>
+</div>
