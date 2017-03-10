@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ApiService } from './../../services/api.service';
 import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
@@ -8,17 +8,7 @@ declare var Connection: any;
 
 @Component({
 	selector: 'maj-element',
-	template: `
-		<div>Une mise à jour est disponible</div>
-
-		<button (click)="makeMaj()">Faire la mise à jour</button>
-
-		<div *ngIf="!majDone">En cours...</div>
-
-		<ul>
-			<li *ngFor="let medoc of medocs">{{medoc.name}}</li>
-		</ul>
-	`,
+	templateUrl: './maj.html',
 	styles: [`
 
 		div {
@@ -29,33 +19,42 @@ declare var Connection: any;
 })
 
 export class MajComponent {
-	medocs: any;
-	majDone: boolean;
+	@Output() updateMajStatus = new EventEmitter();
+	medocs			: 		any;
+	majDone			: 		boolean;
+	majStarted 		: 		boolean 	= false;
 
 	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService) {
-		console.log('majtodo');
 
         platform.ready().then(() => {        	
         	this.checkNetwork();
         });
     }
 
-	makeMaj() {
-		this.majDone = false;
-		this.medocs = [];
+	makeMaj(agreed) {
 
-		console.log('begin maj');
+		if(agreed) {
 
-		this.getMedocs().then((medocs) => {
+			this.majStarted = true;
+			this.majDone = false;
+			this.medocs = [];
 
-			this.dbService.makeMaj(medocs, (response) => {
+			console.log('begin maj');
 
-				this.medocs = response;
-				this.majDone = true;
+			this.getMedocs().then((medocs) => {
 
-				console.log('end maj', this.medocs);
+				this.dbService.makeMaj(medocs, (response) => {
+
+					this.medocs = response;
+					this.majDone = true;
+
+					console.log('end maj', this.medocs);
+				});
 			});
-		});
+
+		} else {
+			this.updateMaj();
+		}
 	}
 
 	getMedocs() {
@@ -96,4 +95,8 @@ export class MajComponent {
 			console.log("You are not on a device which can detect you Internet connection");
 		}
     }
+
+	updateMaj() {
+		this.updateMajStatus.emit();
+	}
 }

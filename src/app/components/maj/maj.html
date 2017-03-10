@@ -1,0 +1,10 @@
+<div>Une mise à jour est disponible</div>
+
+<button (click)="makeMaj(true)">Faire la mise à jour</button>
+<button (click)="makeMaj(false)">Une prochaine fois</button>
+
+<div *ngIf="!majDone && majStarted">En cours...</div>
+
+<ul>
+	<li *ngFor="let medoc of medocs">{{medoc.name}}</li>
+</ul>

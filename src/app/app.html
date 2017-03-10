@@ -2,9 +2,10 @@
     
     <!-- Component handling MAJ (Updates from API) -->
     <maj-element 
-        *ngIf="majToDo">
+        *ngIf="majToDo"
+        (updateMajStatus) = updateMajStatus($event)>
     </maj-element>
-    
+
     <!-- Component handling menu, displaying on all principal pages -->
     <my-menu
         class="{{theme}}" 

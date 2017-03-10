@@ -67,7 +67,7 @@ page-home {
 
 my-menu {
 
-	background-color: $maincolor;
+	background-color: $maincolor !important;
 
 	&.dark {
 		background-color: #000;
