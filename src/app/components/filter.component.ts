@@ -17,6 +17,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 	`
 })
 
+
 export class FilterComponent {
 	navClass: string = "material--burger";
 	menuShown: boolean = false;

@@ -51,10 +51,14 @@ page-home {
 
 .page {
 	margin: 0 auto;
-	background-color: #F26F70;
+	background-color: $maincolor;
 	padding: 20px;
 	display: block;
 	height: 100%;
+
+	.dark {
+		background-color: #000;
+	}
 
 	&[hidden] {
 		display: none;
@@ -67,7 +71,7 @@ page-home {
 
 my-menu {
 
-	background-color: $maincolor;
+	background-color: $maincolor !important;
 
 	&.dark {
 		background-color: #000;

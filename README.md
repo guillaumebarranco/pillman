@@ -12,3 +12,6 @@ Pillman is a Ionic 2 application for the nurses. It provides a list of all medic
 	Make update system, from Pillman API -> DONE
 	Add eslint and somes rules to make code lot cleaner
 	Add unit test system
+
+##Remember
+	Every file called staticly (even a .json file from http.get) must be in src/assets folder

@@ -3,13 +3,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
 	selector: 'my-menu',
 	template: `
-
 		<div [className]="getMenuClass()">
 			<div *ngFor="let element of elements" (click)="changePage(element)">
 				{{element}}
 			</div>
 		</div>
-
 		<nav class="navigation--button">
 			<div [className]="navClass" (click)="toggleMenu()">
 				<span></span>
@@ -33,8 +31,6 @@ export class MenuComponent {
 			"recent"
 		];
 	}
-
-	
 
 	getMenuClass() {
 		
