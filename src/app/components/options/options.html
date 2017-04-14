@@ -1,7 +1,15 @@
+<h3>Theme</h3>
 <select [(ngModel)]="theme" (ngModelChange)="updateTheme()">
 	<option value="default-theme">Default</option>
 	<option value="dark-theme">Dark</option>
 	<option value="tree-theme">Green Tree</option>
 </select>
 
-<button (click)="makeMaj()">Make Maj</button>
+<h3>Username</h3>
+<input type="text" [(ngModel)]="username" (ngModelChange)="updateUsername()">
+
+<button (click)="makeMaj()">Rechercher une nouvelle mise à jour</button>
+
+<p>
+	{{ text }}
+</p>

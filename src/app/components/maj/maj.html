@@ -6,8 +6,8 @@
 
 	<!-- <pillman-element></pillman-element> -->
 
-	<button (click)="makeMaj(true)">Faire la mise à jour</button>
-	<button (click)="makeMaj(false)">Une prochaine fois</button>
+	<button *ngIf="!majDone && !majStarted" (click)="makeMaj(true)">Faire la mise à jour</button>
+	<button *ngIf="!majDone && !majStarted" (click)="makeMaj(false)">Une prochaine fois</button>
 
 	<div *ngIf="!majDone && majStarted">Mise à jour en cours...</div>
 

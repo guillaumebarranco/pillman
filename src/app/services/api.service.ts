@@ -31,28 +31,28 @@ export class ApiService {
 	/*     API      */
 	/****************/
 
-	public makeApiCall(url) : Observable<Response> {
+	// public makeApiCall(url) : Observable<Response> {
 
-		if(this.baseUrl === "") {
+	// 	if(this.baseUrl === "") {
 
-			this.init(() => {
-				// TODO
-				console.log('this.baseUrl', this.baseUrl+url);
-				return this.http.get("http://92.222.34.194/medoc/serveur.php"+url);
-			});
-		}
+	// 		this.init(() => {
+	// 			// TODO
+	// 			console.log('this.baseUrl', this.baseUrl+url);
+	// 			return this.http.get("http://92.222.34.194/medoc/serveur.php"+url);
+	// 		});
+	// 	}
 
-		return this.http.get("http://92.222.34.194/medoc/serveur.php"+url);
-	}
+	// 	return this.http.get("http://92.222.34.194/medoc/serveur.php"+url);
+	// }
 
 	public getMedocs() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocs&limit=100");
-		return this.http.get("http://localhost:8181/all/10");
+		return this.http.get("http://ba4dfaab.ngrok.io/all/100");
 	}
 
 	public getLastVersion() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocsVersion");
-		return this.http.get("http://localhost:8181/version");
+		return this.http.get("http://ba4dfaab.ngrok.io/version");
 
 	}
 

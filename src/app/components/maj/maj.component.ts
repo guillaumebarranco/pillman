@@ -3,6 +3,7 @@ import { ApiService } from './../../services/api.service';
 import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
+import Medoc from '../../classes/medoc';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -21,7 +22,7 @@ declare var Connection: any;
 
 export class MajComponent {
 	@Output() updateMajStatus = new EventEmitter();
-	medocs			: 		any;
+	medocs			: 		Medoc[];
 	majDone			: 		boolean;
 	majStarted 		: 		boolean 	= false;
 	hello			:		string;
@@ -32,20 +33,29 @@ export class MajComponent {
         	this.checkNetwork();
         });
 
-        const date = new Date();
+        this.hello = this.getHelloText();
+    }
+
+    getHelloText() {
+
+    	const date = new Date();
         const hour = date.getHours();
 
-        if(hour < 17) {
-        	this.hello = "Bonjour";
+    	let hello = "";
+
+    	if(hour < 17) {
+        	hello = "Bonjour";
         } else {
-        	this.hello = "Bonsoir";
+        	hello = "Bonsoir";
         }
 
         if(typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null) {
-        	this.hello += ` ${name}`;
+        	hello += " " + localStorage.getItem('firstname');
         } else {
-        	this.hello += ' à vous';
+        	hello += ' à vous';
         }
+
+        return hello;
     }
 
 	makeMaj(agreed) {

@@ -7,6 +7,8 @@ Pillman is a Ionic 2 application for the nurses. It provides a list of all medic
 	git clone https://github.com/guillaumebarranco/pillman
 	npm install / yarn
 	ionic serve
+	cordova platform add android
+	ionic run android
 
 ##TODO
 	Add unit test system

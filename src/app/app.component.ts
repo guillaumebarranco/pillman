@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Medoc from './classes/medoc';
 
 import { ApiService } from './services/api.service';
+import { UtilService } from './services/util.service';
 
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
@@ -9,7 +10,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 @Component({
     selector: 'pillman',
     templateUrl: './app.html',
-    providers: [ApiService]
+    providers: [ApiService, UtilService]
 })
 
 export class AppComponent {
@@ -23,7 +24,7 @@ export class AppComponent {
     /*       APP INIT       */
     /************************/
 
-        constructor(platform: Platform, private apiService: ApiService) {
+        constructor(platform: Platform, private apiService: ApiService, private utilService: UtilService) {
 
             platform.ready().then(() => {
                 StatusBar.styleDefault();
@@ -48,57 +49,10 @@ export class AppComponent {
             this.theme = this.getTheme();
         }
 
-    getSplitedVersion(stringVersion) {
-
-        const version = stringVersion.split('.');
-
-        return {
-            x: parseInt(version[0]),
-            y: parseInt(version[1]),
-            z: parseInt(version[2])
-        };
-    }
-
     checkMaj() {
 
-        this.getAppLastMedocsVersion((appVersionString) => {
-
-            const appVersion = appVersionString.json();
-
-            console.log('appVersion', appVersion);
-
-            this.apiService.getLastVersion().subscribe((apiVersionString) => {
-
-                const apiVersion = apiVersionString.json()[0];
-
-                console.log('apiVersion', apiVersion);
-
-                if(appVersion.lastVersion !== apiVersion.Version) {
-
-                    const appVersionParsed = this.getSplitedVersion(appVersion.lastVersion);
-                    const apiVersionParsed = this.getSplitedVersion(apiVersion.Version);
-                    const currentDate = new Date();
-
-                    if(
-                        (appVersionParsed.x > apiVersionParsed.x) ||
-                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y > apiVersionParsed.y) ||
-                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y <= apiVersionParsed.y
-                            && appVersionParsed.z > apiVersionParsed.z) ||
-                        (appVersion.wait && appVersion.waitTime > currentDate.getTime()) // If the remind date is after the current date
-                    ) {
-                        return;
-                    }
-
-                    this.majToDo = true;
-                    return;
-                }
-            });
-        });
-    }
-
-    getAppLastMedocsVersion(callback) {
-        this.apiService.getAppLastMedocsVersion().subscribe(response => {
-            callback(response);
+        this.utilService.checkMaj(this.apiService).then((response) => {
+            this.majToDo = response ? true: false;
         });
     }
 
