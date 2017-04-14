@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { ApiService } from './../../services/api.service';
 import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
+import { File } from '@ionic-native/file';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -15,7 +16,7 @@ declare var Connection: any;
 			color: black;
 		}
 	`],
-	providers: [ApiService, DBService]
+	providers: [ApiService, DBService, File]
 })
 
 export class MajComponent {
@@ -23,12 +24,28 @@ export class MajComponent {
 	medocs			: 		any;
 	majDone			: 		boolean;
 	majStarted 		: 		boolean 	= false;
+	hello			:		string;
 
-	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService) {
+	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService, private file: File) {
 
         platform.ready().then(() => {        	
         	this.checkNetwork();
         });
+
+        const date = new Date();
+        const hour = date.getHours();
+
+        if(hour < 17) {
+        	this.hello = "Bonjour";
+        } else {
+        	this.hello = "Bonsoir";
+        }
+
+        if(typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null) {
+        	this.hello += ` ${name}`;
+        } else {
+        	this.hello += ' à vous';
+        }
     }
 
 	makeMaj(agreed) {
@@ -53,8 +70,28 @@ export class MajComponent {
 			});
 
 		} else {
+
+			this.updateNextMajProposalDate();
 			this.updateMaj();
 		}
+	}
+
+	updateNextMajProposalDate() {
+
+		const today = new Date();
+    	const nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+
+		const timestamp = nextweek.getTime();
+		const wait = true;
+
+		this.file.writeFile('../../', 'test.js', "hello dude", {}).then((response) => {
+
+			console.log('response file writing', response);
+		})
+		.catch((err) => {
+			console.log('error', err);
+		});
+
 	}
 
 	getMedocs() {

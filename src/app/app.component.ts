@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Medoc from './classes/medoc';
 
 import { ApiService } from './services/api.service';
 
@@ -12,49 +13,85 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 })
 
 export class AppComponent {
-    medoc           : any;
+    medoc           : Medoc;
     currentPage     : string     = 'home';
     theme           : string     = "default-theme";
     majToDo         : boolean    = false;
     app             : Object;
 
-    constructor(platform: Platform, private apiService: ApiService) {
+    /************************/
+    /*       APP INIT       */
+    /************************/
 
-        platform.ready().then(() => {
-            StatusBar.styleDefault();
-            Splashscreen.hide();
-        });
-    }
+        constructor(platform: Platform, private apiService: ApiService) {
 
-    ngOnInit() {
+            platform.ready().then(() => {
+                StatusBar.styleDefault();
+                Splashscreen.hide();
+            });
+        }
 
-        console.log('before check maj');
+        ngOnInit() {
 
-        this.checkMaj();
+            console.log('before check maj');
 
-        this.medoc = {};
-        this.apiService.getAppDatas().subscribe((response) => {
-            this.app = response.json();
-        });
+            this.checkMaj();
 
-        this.theme = this.getTheme();
+            this.medoc = {
+                name: ''
+            };
+
+            this.apiService.getAppDatas().subscribe((response) => {
+                this.app = response.json();
+            });
+
+            this.theme = this.getTheme();
+        }
+
+    getSplitedVersion(stringVersion) {
+
+        const version = stringVersion.split('.');
+
+        return {
+            x: parseInt(version[0]),
+            y: parseInt(version[1]),
+            z: parseInt(version[2])
+        };
     }
 
     checkMaj() {
 
-        this.getAppLastMedocsVersion((appVersion) => {
+        this.getAppLastMedocsVersion((appVersionString) => {
 
-            console.log('appVersion', appVersion.json());
+            const appVersion = appVersionString.json();
 
-            this.apiService.getLastVersion().subscribe((apiVersion) => {
+            console.log('appVersion', appVersion);
 
-                console.log('apiVersion', apiVersion.json());
+            this.apiService.getLastVersion().subscribe((apiVersionString) => {
 
-                this.majToDo = true;
+                const apiVersion = apiVersionString.json()[0];
 
-                // if(version.version !== response.json().version) {
-                //     this.majToDo = true;
-                // }
+                console.log('apiVersion', apiVersion);
+
+                if(appVersion.lastVersion !== apiVersion.Version) {
+
+                    const appVersionParsed = this.getSplitedVersion(appVersion.lastVersion);
+                    const apiVersionParsed = this.getSplitedVersion(apiVersion.Version);
+                    const currentDate = new Date();
+
+                    if(
+                        (appVersionParsed.x > apiVersionParsed.x) ||
+                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y > apiVersionParsed.y) ||
+                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y <= apiVersionParsed.y
+                            && appVersionParsed.z > apiVersionParsed.z) ||
+                        (appVersion.wait && appVersion.waitTime > currentDate.getTime()) // If the remind date is after the current date
+                    ) {
+                        return;
+                    }
+
+                    this.majToDo = true;
+                    return;
+                }
             });
         });
     }

@@ -1,6 +1,6 @@
 <!-- <pillman></pillman> -->
 
-<filter-typesearch [searchType]="searchType" (changeSearchType)="changeSearchType($event)"></filter-typesearch>
+<filter-typesearch [hidden]="!researchDone" [searchType]="searchType" (changeSearchType)="changeSearchType($event)"></filter-typesearch>
 <!-- <my-filter ></my-filter> -->
 
 <search-element [hidden]="!researchDone" (changeResearch)="changeResearch($event)"></search-element>

@@ -3,7 +3,8 @@
 /*****************/
 
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+// import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 /*****************/
 /*   NG MODULES  */
@@ -66,7 +67,8 @@ const modules = [
     HttpModule,
     UiSwitchModule,
     Ng2AutoCompleteModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot()
 ];
 
 const components = [
@@ -87,7 +89,6 @@ const components = [
 ];
 
 const providers = [
-    Storage
 ];
 
 @NgModule({

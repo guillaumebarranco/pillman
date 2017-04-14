@@ -1,11 +1,15 @@
 <div class="page">
-	
+
+	<h2>{{ hello }}</h2>
+
 	<h2>Une mise à jour est disponible</h2>
+
+	<!-- <pillman-element></pillman-element> -->
 
 	<button (click)="makeMaj(true)">Faire la mise à jour</button>
 	<button (click)="makeMaj(false)">Une prochaine fois</button>
 
-	<div *ngIf="!majDone && majStarted">En cours...</div>
+	<div *ngIf="!majDone && majStarted">Mise à jour en cours...</div>
 
 	<ul>
 		<li *ngFor="let medoc of medocs">{{medoc.name}}</li>

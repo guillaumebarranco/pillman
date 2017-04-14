@@ -25,7 +25,7 @@
         [medoc]="medoc"
     >
     </page-home>
-    
+
     <!-- Component handling user recent researches -->
     <page-recent 
         class="page {{theme}}" 
@@ -43,6 +43,7 @@
         [hidden]="handlePage('options')" 
         [theme]="theme" 
         (changeTheme) = changeTheme($event)
+        (updateMajStatus) = updateMajStatus($event)
     >
     </page-options>
 </ion-content>

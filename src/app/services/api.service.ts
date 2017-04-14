@@ -16,7 +16,7 @@ export class ApiService {
 	}
 
 	init(callback) {
-		var env = "prod";
+		var env = "dev";
 
 		this.getBaseUrl().subscribe((response) => {
 
@@ -46,11 +46,14 @@ export class ApiService {
 	}
 
 	public getMedocs() : Observable<Response> {
-		return this.makeApiCall("?function=getMedocs&limit=100");
+		// return this.makeApiCall("?function=getMedocs&limit=100");
+		return this.http.get("http://localhost:8181/all/10");
 	}
 
 	public getLastVersion() : Observable<Response> {
-		return this.makeApiCall("?function=getMedocsVersion");
+		// return this.makeApiCall("?function=getMedocsVersion");
+		return this.http.get("http://localhost:8181/version");
+
 	}
 
 	/****************/

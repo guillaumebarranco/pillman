@@ -31,8 +31,7 @@ export class HomePage {
 	public researchDone			: boolean 	= true;
 	public search;
 
-	elementList					: any;
-	labos						: any;
+	labos						: string[];
 
 	constructor(private apiService: ApiService) {
 

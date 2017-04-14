@@ -1,6 +1,6 @@
 {
 	"dev": {
-		"apiUrl": "http://localhost/medoc/serveur.php"
+		"apiUrl": "http://localhost:8181/"
 	},
 	"prod": {
 		"apiUrl": "http://92.222.34.194/medoc/serveur.php"

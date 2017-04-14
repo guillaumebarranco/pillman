@@ -1,3 +1,3 @@
-export class Book {
+export default class Medoc {
 	name: string;
 }
