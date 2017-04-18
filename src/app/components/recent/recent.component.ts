@@ -29,6 +29,10 @@ export class RecentPage {
 		this.medocChange.emit(medoc);
 	}
 
+	goBackHome() {
+		this.medocChange.emit({});
+	}
+
 	public getRecentResearch() {
 
 		this.recentResearch = [];

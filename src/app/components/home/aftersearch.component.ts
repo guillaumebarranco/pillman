@@ -36,8 +36,21 @@ export class AftersearchComponent {
 		}, 500);
 	}
 
+	reinitResearch(element) {
+		this.researchDone = element;
+		this.found = false;
+		this.propos = [];
+		this.launchMatch();
+	}
+
 	updateResearchDone(element) {
 		this.changeResearchDone.emit(element);
+		this.found = true;
+		this.propos = [];
+	}
+
+	goBackHome() {
+		this.changeResearchDone.emit({});
 		this.found = true;
 		this.propos = [];
 	}

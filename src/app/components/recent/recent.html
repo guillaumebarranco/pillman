@@ -1,6 +1,14 @@
 <h2>Recherches récentes</h2>
 
-<div class="recentResearch" *ngFor="let medoc of recentResearch">
-	{{medoc.name}} <br />
-	<button (click)="changeResearch(medoc)">Voir la fiche</button>
+<div *ngIf="recentResearch[0]">
+	
+	<div class="recentResearch" *ngFor="let medoc of recentResearch">
+		{{medoc.name}} <br />
+		<button (click)="changeResearch(medoc)">Voir la fiche</button>
+	</div>
+</div>
+
+<div *ngIf="!recentResearch[0]">
+	<p>Pas de recherche récente</p>
+	<button (click)="goBackHome()">Revenir à la page d'accueil</button>
 </div>

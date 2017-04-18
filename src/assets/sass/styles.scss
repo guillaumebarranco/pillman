@@ -14,6 +14,7 @@ $secondfont: "Oswald";
 	src: "../fonts/webfonts/opensans_regular_macroman/OpenSans-Regular-webfont.svg";
 }
 
+
 body {
 	font-family: $mainfont, sans-serif;
 	padding: 0;
@@ -22,6 +23,10 @@ body {
 
 h1, h2 {
 	font-family: $secondfont, sans-serif;
+}
+
+h2 {
+	text-align: center;
 }
 
 button {
@@ -49,6 +54,13 @@ page-home {
 	position: relative;
 }
 
+search-element {
+
+	input {
+	    margin-bottom: 10px;
+	}
+}
+
 .page {
 	margin: 0 auto;
 	background-color: $maincolor;
@@ -71,7 +83,7 @@ page-home {
 
 my-menu {
 
-	background-color: $maincolor !important;
+	background-color: $maincolor;
 
 	&.dark {
 		background-color: #000;
@@ -80,6 +92,7 @@ my-menu {
 	width: 100%;
     height: 200px;
     padding-top: 50px;
+    transition: 0.4s;
     z-index: 2;
     display: block;
 
@@ -406,17 +419,24 @@ my-filter {
 	}
 }
 
+$menu_width: 200px;
+
 .menu {
 	position: absolute;
 	top: 0;
-	left: -200px;
+	left: -$menu_width;
 	transition: 0.4s;
-	width: 200px;
+	width: 35%;
+	max-width: $menu_width;
 	font-size: 3.5em;
     background: darken($maincolor, 15%);
     height: 100%;
     z-index: 5;
     box-sizing: border-box;
+
+    @media screen and (max-width: 600px) {
+    	font-size: 2.5em;
+    }
 
     &.show {
 		left: 0;
@@ -424,7 +444,7 @@ my-filter {
 	}
 
 	&.hide {
-		left: -200px;
+		left: -$menu_width;
 		animation: toLeft 0.4s ease-in-out;
 	}
 
@@ -435,14 +455,26 @@ my-filter {
 
 @keyframes toRight {
 
-	from { left: -200px; }
-	to { left: 0; }
+	0% { left: -$menu_width; }
+	100% { left: 0; }
 }
 
 @keyframes toLeft {
 
-	from { left: 0; }
-	to { left: -200px; }
+	0% { left: 0; }
+	100% { left: -$menu_width; }
+}
+
+@-webkit-keyframes toRight {
+
+	0% { left: -$menu_width; }
+	100% { left: 0; }
+}
+
+@-webkit-keyframes toLeft {
+
+	0% { left: 0; }
+	100% { left: -$menu_width; }
 }
 
 /******************/
@@ -501,16 +533,18 @@ my-filter {
 
 filter-typesearch {
 	position: absolute;
-    top: -100px;
-    right: 20px;
+    top: -50px;
+    right: 50px;
 }
+
+$menu_filter_width: 200px;
 
 .menu-filter {
 	position: absolute;
 	top: 0;
-	right: -200px;
+	right: -$menu_filter_width;
 	transition: 0.4s;
-	width: 200px;
+	width: $menu_filter_width;
 	font-size: 3.5em;
     background: darken($maincolor, 15%);
     height: 100%;
@@ -523,7 +557,7 @@ filter-typesearch {
 	}
 
 	&.hide {
-		right: -200px;
+		right: -$menu_filter_width;
 		animation: toRight 0.4s ease-in-out;
 	}
 
@@ -534,12 +568,24 @@ filter-typesearch {
 
 @keyframes toLeft {
 
-	from { right: -200px; }
+	from { right: -$menu_filter_width; }
 	to { right: 0; }
 }
 
 @keyframes toRight {
 
 	from { right: 0; }
-	to { right: -200px; }
+	to { right: -$menu_filter_width; }
+}
+
+@-webkit-keyframes toLeft {
+
+	from { right: -$menu_filter_width; }
+	to { right: 0; }
+}
+
+@-webkit-keyframes toRight {
+
+	from { right: 0; }
+	to { right: -$menu_filter_width; }
 }

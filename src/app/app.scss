@@ -1,14 +1,61 @@
-.default-theme {
-    background-color: #F26F70;
-    color: #fff;
+.page {
+
+	input {
+		padding: 5px;
+	}
+
+	&.default-theme {
+	    background-color: #F26F70;
+	    color: #fff;
+
+	    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+		  color: #fff;
+		}
+
+		input {
+			background: #F26F70;
+		    border: solid 1px white;
+		    color: white;
+		}
+	}
+
+	&.dark-theme {
+	    background-color: #000;
+	    color: #fff;
+
+	    input {
+			background: #fff;
+		    border: solid 1px white;
+		    color: #000;
+		}
+	}
+
+	&.tree-theme {
+	    background-color: forestgreen;
+	    color: #000;
+
+	    input {
+			background: forestgreen;
+		    border: solid 1px white;
+		    color: #fff;
+		}
+	}
 }
 
-.dark-theme {
-    background-color: #000;
-    color: #fff;
-}
+my-menu {
 
-.tree-theme {
-    background-color: forestgreen;
-    color: #000;
+	&.default-theme {
+	    background-color: #F26F70;
+	    color: #fff;
+	}
+
+	&.dark-theme {
+	    background-color: #000;
+	    color: #fff;
+	}
+
+	&.tree-theme {
+	    background-color: forestgreen;
+	    color: #000;
+	}
 }

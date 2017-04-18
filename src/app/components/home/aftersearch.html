@@ -1,12 +1,21 @@
 <div>Vous avez écrit : {{search}}</div>
 
-<div *ngIf="!found">Pas de match direct trouvé</div>
+<div *ngIf="!found || !propos[0]">
+	<p>Pas de match direct trouvé</p>
 
-<div>Nous pouvons vous proposer les médicaments suivants :</div>
+	<button (click)="reinitResearch()">Essayer une autre recherche</button>
+	<br><br>
+	<button (click)="goBackHome()">Retourner sur la page d'accueil</button>
+</div>
 
-<ul *ngIf="propos[0]">
-	<li *ngFor="let element of propos" class="medoc_listed_element">
-		{{element.name}} <br />
-		<button (click)="updateResearchDone(element)">Voir la fiche</button>
-	</li>
-</ul>
+<div *ngIf="found && propos[0]">
+	<p>Nous pouvons vous proposer les médicaments suivants :</p>
+
+	<ul>
+		<li *ngFor="let element of propos" class="medoc_listed_element">
+			{{element.name}} <br />
+			<button (click)="updateResearchDone(element)">Voir la fiche</button>
+		</li>
+	</ul>
+
+</div>
