@@ -438,12 +438,12 @@ $menu_width: 200px;
     	font-size: 2.5em;
     }
 
-    &.show {
+    &.show_menu {
 		left: 0;
 		animation: toRight 0.4s ease-in-out;
 	}
 
-	&.hide {
+	&.hide_menu {
 		left: -$menu_width;
 		animation: toLeft 0.4s ease-in-out;
 	}

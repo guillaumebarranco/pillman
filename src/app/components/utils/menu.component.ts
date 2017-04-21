@@ -34,8 +34,8 @@ export class MenuComponent {
 
 	getMenuClass() {
 		
-		if(this.menuShown) return "menu show";
-		return "menu hide";
+		if(this.menuShown) return "menu show_menu";
+		return "menu hide_menu";
 	}
 
 	toggleMenu() {

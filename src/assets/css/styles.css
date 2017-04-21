@@ -283,10 +283,10 @@ my-filter {
   @media screen and (max-width: 600px) {
     .menu {
       font-size: 2.5em; } }
-  .menu.show {
+  .menu.show_menu {
     left: 0;
     animation: toRight 0.4s ease-in-out; }
-  .menu.hide {
+  .menu.hide_menu {
     left: -200px;
     animation: toLeft 0.4s ease-in-out; }
   .menu div {
