@@ -47,7 +47,7 @@ export class ApiService {
 
 	public getMedocs() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocs&limit=100");
-		return this.http.get("http://ba4dfaab.ngrok.io/all/100");
+		return this.http.get("http://ba4dfaab.ngrok.io/all/15000");
 	}
 
 	public getLastVersion() : Observable<Response> {

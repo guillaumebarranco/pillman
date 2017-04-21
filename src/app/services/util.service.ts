@@ -20,6 +20,8 @@ export class UtilService {
 
 	                const apiVersion = apiVersionString.json()[0];
 
+	                localStorage.setItem('currentApiVersion', apiVersion);
+
 	                console.log('apiVersion', apiVersion);
 
 	                if(appVersion.lastVersion !== apiVersion.Version) {
@@ -48,9 +50,21 @@ export class UtilService {
     }
 
     getAppLastMedocsVersion(apiService, callback) {
-        apiService.getAppLastMedocsVersion().subscribe(response => {
-            callback(response);
-        });
+
+
+    	if(localStorage.getItem('lastMajVersion') !== null) {
+
+    		callback({
+    			lastVersion: localStorage.getItem('lastMajVersion')
+    		});
+
+    	} else {
+    		callback({lastVersion: "0.0.0"})
+    	}
+
+        // apiService.getAppLastMedocsVersion().subscribe(response => {
+        //     callback(response);
+        // });
     }
 
 	getSplitedVersion(stringVersion) {

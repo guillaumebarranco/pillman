@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { ApiService } from './../../services/api.service';
 import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
-import { File } from '@ionic-native/file';
 import Medoc from '../../classes/medoc';
 
 declare var navigator: any;
@@ -17,7 +16,7 @@ declare var Connection: any;
 			color: black;
 		}
 	`],
-	providers: [ApiService, DBService, File]
+	providers: [ApiService, DBService]
 })
 
 export class MajComponent {
@@ -27,7 +26,7 @@ export class MajComponent {
 	majStarted 		: 		boolean 	= false;
 	hello			:		string;
 
-	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService, private file: File) {
+	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService) {
 
         platform.ready().then(() => {        	
         	this.checkNetwork();
@@ -75,6 +74,8 @@ export class MajComponent {
 					this.medocs = response;
 					this.majDone = true;
 
+					localStorage.setItem('lastMajVersion', localStorage.getItem('currentApiVersion'));
+
 					console.log('end maj', this.medocs);
 				});
 			});
@@ -94,14 +95,8 @@ export class MajComponent {
 		const timestamp = nextweek.getTime();
 		const wait = true;
 
-		this.file.writeFile('../../', 'test.js', "hello dude", {}).then((response) => {
-
-			console.log('response file writing', response);
-		})
-		.catch((err) => {
-			console.log('error', err);
-		});
-
+		localStorage.setItem('nextProposalUpdate', timestamp.toString());
+		localStorage.setItem('waitForProposal', wait.toString());
 	}
 
 	getMedocs() {
