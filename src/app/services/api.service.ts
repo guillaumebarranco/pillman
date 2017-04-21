@@ -47,12 +47,12 @@ export class ApiService {
 
 	public getMedocs() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocs&limit=100");
-		return this.http.get("http://ba4dfaab.ngrok.io/all/15000");
+		return this.http.get("http://localhost:8181/all/150");
 	}
 
 	public getLastVersion() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocsVersion");
-		return this.http.get("http://ba4dfaab.ngrok.io/version");
+		return this.http.get("http://localhost:8181/version");
 
 	}
 

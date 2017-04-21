@@ -1,10 +1,15 @@
 <h2>Recherches récentes</h2>
 
+<label for="">Nombre de médicaments à afficher</label>
+<input type="number" [(ngModel)]="nbResearchsShow">
+
 <div *ngIf="recentResearch[0]">
 	
-	<div class="recentResearch" *ngFor="let medoc of recentResearch">
-		{{medoc.name}} <br />
-		<button (click)="changeResearch(medoc)">Voir la fiche</button>
+	<div class="recentResearch" *ngFor="let medoc of recentResearch; let i = index">
+		<div *ngIf="i < nbResearchsShow && medoc.name !== ''">
+			{{medoc.name}} <br />
+			<button (click)="changeResearch(medoc)">Voir la fiche</button>
+		</div>
 	</div>
 </div>
 

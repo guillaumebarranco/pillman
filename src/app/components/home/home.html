@@ -2,8 +2,10 @@
 
 <h1>Accueil</h1>
 
-<filter-typesearch [hidden]="!researchDone" [searchType]="searchType" (changeSearchType)="changeSearchType($event)"></filter-typesearch>
-<!-- <my-filter ></my-filter> -->
+<details style="margin: 30px 0;">
+	<summary>Elements de recherche</summary>
+	<filter-typesearch [hidden]="!researchDone" [searchType]="searchType" (changeSearchType)="changeSearchType($event)"></filter-typesearch>
+</details>
 
 <search-element [hidden]="!researchDone" (changeResearch)="changeResearch($event)"></search-element>
 
@@ -17,4 +19,4 @@
 
 <!-- <autocomplete-element [hidden]="!researchDone" [elements]="elements" [medoc]="medoc"></autocomplete-element> -->
 
-<card-element [hidden]="!researchDone" [searchType]="searchType" [elements]="elements" [medoc]="medoc"></card-element>
+<card-element [searchType]="searchType" [elements]="elements" [medoc]="medoc"></card-element>

@@ -68,6 +68,7 @@ export class AppComponent {
         // Received by Recent Component
         medocChange(medoc) {
             this.medoc = medoc;
+            console.log('this medoc', this.medoc);
             this.currentPage = "home";
         }
 

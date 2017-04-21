@@ -46,12 +46,14 @@ export class HomePage {
 			this.hideLoader();
 
 			// console.log(medocs);
-			// console.log(medocs.json());
+			console.log(medocs.json());
 
 			// this.elements = this.formateMedocs(medocs.json());
 			this.elements = this.formateMedocs(medocs.json().slice(0, 15));
 			// console.log(this.elements);
 			this.medoc = this.elements[0];
+
+			console.log(this.medoc);
 
 			if(this.medoc.side_effect.length > 100) {
 				this.showAllEffects = false;
@@ -131,7 +133,7 @@ export class HomePage {
 
 			if(
 				localStorage.getItem("searchType") !== null 
-				&& (localStorage.getItem("searchType") === "name" || localStorage.getItem("searchType") === "denomination")
+				&& (localStorage.getItem("searchType") === "name" || localStorage.getItem("searchType") === "dci")
 			) {
 				return true;
 			}

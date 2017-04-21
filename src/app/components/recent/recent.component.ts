@@ -17,6 +17,7 @@ export class RecentPage {
 	@Output() medocChange = new EventEmitter();
 
 	recentResearch: any;
+	nbResearchsShow: number = 10;
 
 	constructor() {}
 
@@ -25,6 +26,7 @@ export class RecentPage {
 	}
 
 	changeResearch(medoc) {
+		console.log('medoc', medoc);
 		this.medoc = medoc;
 		this.medocChange.emit(medoc);
 	}

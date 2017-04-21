@@ -25,6 +25,7 @@ export class MajComponent {
 	majDone			: 		boolean;
 	majStarted 		: 		boolean 	= false;
 	hello			:		string;
+	theme = "default";
 
 	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService) {
 

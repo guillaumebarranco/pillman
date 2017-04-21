@@ -29,7 +29,7 @@ export class DBService {
 							this.medocs.push({
 								"name": response.data.rows.item(i).name,
 								"cis": response.data.rows.item(i).cis,
-								"denomination": response.data.rows.item(i).denomination,
+								"dci": response.data.rows.item(i).dci,
 								"side_effect": response.data.rows.item(i).side_effect,
 								"forme": response.data.rows.item(i).forme
 							});
@@ -46,7 +46,7 @@ export class DBService {
 
 		// this.createMedocTable(db, () => {
 
-			const elements = 'name, cis, denomination, side_effect, forme';
+			const elements = 'name, cis, dci, side_effect, forme';
 
 			const queryCreate = "CREATE TABLE IF NOT EXISTS medicaments ("+elements+")";
 			const queryInsert = "INSERT INTO medicaments ("+elements+") VALUES (?, ?, ?, ?, ?);";
@@ -56,7 +56,7 @@ export class DBService {
 				tx.executeSql(queryCreate);
 
 				for(let i in medocs) {
-					tx.executeSql(queryInsert, [medocs[i].name, medocs[i].cis, medocs[i].denomination, medocs[i].side_effect, medocs[i].forme]);
+					tx.executeSql(queryInsert, [medocs[i].name, medocs[i].cis, medocs[i].dci, medocs[i].side_effect, medocs[i].forme]);
 				}
 
 				tx.executeSql(querySelect, [], function(tx, rs) {
@@ -79,7 +79,7 @@ export class DBService {
 
 	createMedocTable(db, callback) {
 
-		const query = 'CREATE TABLE IF NOT EXISTS medicaments (id int(11) NOT NULL,name varchar(255) NOT NULL,cis varchar(255) NOT NULL,denomination varchar(255) NOT NULL,side_effect longtext NOT NULL,forme varchar(255) NOT NULL, PRIMARY KEY (id));'
+		const query = 'CREATE TABLE IF NOT EXISTS medicaments (id int(11) NOT NULL,name varchar(255) NOT NULL,cis varchar(255) NOT NULL,dci varchar(255) NOT NULL,side_effect longtext NOT NULL,forme varchar(255) NOT NULL, PRIMARY KEY (id));'
 		;
 
 		console.log('db', db);

@@ -3,7 +3,6 @@ import { ApiService } from './api.service';
 export class UtilService {
 
 	constructor() {
-		console.log('constructed');
 	}
 
     checkMaj(apiService) {
@@ -12,17 +11,13 @@ export class UtilService {
 
 			this.getAppLastMedocsVersion(apiService, (appVersionString) => {
 
-	            const appVersion = appVersionString.json();
-
-	            console.log('appVersion', appVersion);
+	            const appVersion = appVersionString;
 
 	            apiService.getLastVersion().subscribe((apiVersionString) => {
 
 	                const apiVersion = apiVersionString.json()[0];
 
 	                localStorage.setItem('currentApiVersion', apiVersion);
-
-	                console.log('apiVersion', apiVersion);
 
 	                if(appVersion.lastVersion !== apiVersion.Version) {
 
@@ -55,7 +50,7 @@ export class UtilService {
     	if(localStorage.getItem('lastMajVersion') !== null) {
 
     		callback({
-    			lastVersion: localStorage.getItem('lastMajVersion')
+    			lastVersion: JSON.parse(localStorage.getItem('lastMajVersion'))
     		});
 
     	} else {

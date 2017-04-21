@@ -359,9 +359,7 @@ my-filter {
   right: 0; }
 
 filter-typesearch {
-  position: absolute;
-  top: -50px;
-  right: 50px; }
+  margin-top: 20px; }
 
 .menu-filter {
   position: absolute;

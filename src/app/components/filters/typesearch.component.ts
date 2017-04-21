@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 	template: `
 		<!--<select [(ngModel)]="searchType" (ngModelChange)="updateSearchType()">
 			<option value="name">Par Nom</option>
-			<option value="denomination">Par denomination</option>
+			<option value="dci">Par DCI</option>
 		</select>-->
 
 		<ui-switch [(ngModel)]="enabled" (ngModelChange)="updateSearchType()"></ui-switch>
@@ -27,7 +27,7 @@ export class TypesearchComponent {
 	constructor() {}
 
 	updateSearchType() {
-		this.searchType = this.enabled ? "denomination": "name";
+		this.searchType = this.enabled ? "dci": "name";
 		this.changeSearchType.emit(this.searchType);
 	}
 }
