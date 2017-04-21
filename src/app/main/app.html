@@ -1,10 +1,4 @@
 <ion-content>
-    
-    <!-- Component handling MAJ (Updates from API) -->
-    <maj-element 
-        *ngIf="majToDo"
-        (updateMajStatus) = updateMajStatus($event)>
-    </maj-element>
 
     <!-- Component handling menu, displaying on all principal pages -->
     <my-menu
@@ -14,6 +8,12 @@
         (pageChange) = pageChange($event)
     >
     </my-menu>
+
+    <!-- Component handling MAJ (Updates from API) -->
+    <maj-element 
+        *ngIf="majToDo"
+        (updateMajStatus) = updateMajStatus($event)>
+    </maj-element>
 
     <!--<pillman-element></pillman-element>-->
     

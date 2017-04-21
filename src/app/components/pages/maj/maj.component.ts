@@ -1,8 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { ApiService } from './../../services/api.service';
-import { DBService } from './../../services/db.service';
 import { Platform } from 'ionic-angular';
-import Medoc from '../../classes/medoc';
+
+import { ApiService } from '../../../services/api.service';
+import { DBService } from '../../../services/db.service';
+import Medoc from '../../../classes/medoc';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -19,7 +20,7 @@ declare var Connection: any;
 	providers: [ApiService, DBService]
 })
 
-export class MajComponent {
+export class MajPage {
 	@Output() updateMajStatus = new EventEmitter();
 	medocs			: 		Medoc[];
 	majDone			: 		boolean;

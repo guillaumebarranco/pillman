@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { UtilService } from '../../services/util.service';
-import { ApiService } from '../../services/api.service';
+import { UtilService } from '../../../services/util.service';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
 	selector: 'page-options',

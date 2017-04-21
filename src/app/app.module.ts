@@ -1,64 +1,51 @@
-/*****************/
-/* IONIC MODULES */
-/*****************/
+import { AppComponent }              from './main/app.component';
 
-import { IonicApp, IonicModule } from 'ionic-angular';
-// import { Storage } from '@ionic/storage';
-import { IonicStorageModule } from '@ionic/storage';
+/********************/
+/*   IONIC MODULES  */
+/********************/
 
-/*****************/
-/*   NG MODULES  */
-/*****************/
+import { IonicApp, IonicModule }     from 'ionic-angular';
+import { IonicStorageModule }        from '@ionic/storage';
 
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
-// import { IonicApp, IonicModule } from 'ionic-angular';
+/********************/
+/*    NG2 MODULES   */
+/********************/
 
-/*****************/
-/*  EXT MODULES  */
-/*****************/
+import { NgModule }                  from '@angular/core';
+import { BrowserModule }             from '@angular/platform-browser';
+import { HttpModule }                from '@angular/http';
 
-import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-// import { Typeahead } from 'ng2-typeahead';
-import { UiSwitchModule } from 'angular2-ui-switch';
+/********************/
+/*    EXT MODULES   */
+/********************/
 
-import { AppComponent }   from './main/app.component';
+import { Ng2AutoCompleteModule }     from 'ng2-auto-complete';
+import { UiSwitchModule }            from 'angular2-ui-switch';
 
-/*****************/
-/*   COMPONENTS  */
-/*****************/
+/********************/
+/*    COMPONENTS    */
+/********************/
 
-import { RecentPage } from './components/recent/recent.component';
-import { OptionsPage } from './components/options/options.component';
-import { HomePage } from './components/home/home.component';
+import { RecentPage }                from './components/pages/recent/recent.component';
+import { OptionsPage }               from './components/pages/options/options.component';
+import { HomePage }                  from './components/pages/home/home.component';
+import { MajPage }                   from './components/pages/maj/maj.component';
 
 // import { SlidesComponent } from './components/slides.component';
-import { SlidesComponent } from './components/utils/fakeSlides.component';
-import { MenuComponent } from './components/utils/menu.component';
-import { TypesearchComponent } from './components/filters/typesearch.component';
+import { SlidesComponent }           from './components/utils/fakeSlides.component';
+import { MenuComponent }             from './components/utils/menu.component';
+import { PillmanComponent }          from './components/utils/pillman.component';
 
-import { PillmanComponent } from './components/utils/pillman.component';
+import { TypesearchComponent }       from './components/elements/home/typesearch.component';
+import { SearchComponent }           from './components/elements/home/search.component';
+import { AftersearchComponent }      from './components/elements/home/aftersearch.component';
+import { AutocompleteComponent }     from './components/elements/home/autocomplete.component';
+import { CardComponent }             from './components/elements/home/card.component';
 
-import { SearchComponent } from './components/home/search.component';
-import { AftersearchComponent } from './components/home/aftersearch.component';
-import { AutocompleteComponent } from './components/home/autocomplete.component';
-import { CardComponent } from './components/home/card.component';
 
-import { MajComponent } from './components/maj/maj.component';
-
-/*****************/
-/*     CONFIG    */
-/*****************/
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCVAdp4lUwOC7-jlGOOwGh1-iUvlvT72kE",
-    authDomain: "miarobot-b5732.firebaseapp.com",
-    databaseURL: "https://miarobot-b5732.firebaseio.com",
-    storageBucket: "miarobot-b5732.appspot.com",
-    messagingSenderId: "1045618538550"
-};
+/********************/
+/*      CONFIG      */
+/********************/
 
 const modules = [
     IonicModule.forRoot(AppComponent),
@@ -66,7 +53,6 @@ const modules = [
     HttpModule,
     UiSwitchModule,
     Ng2AutoCompleteModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     IonicStorageModule.forRoot()
 ];
 
@@ -83,7 +69,7 @@ const components = [
     AftersearchComponent,
     AutocompleteComponent,
     CardComponent,
-    MajComponent
+    MajPage
 ];
 
 const providers = [
