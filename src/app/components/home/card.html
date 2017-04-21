@@ -5,9 +5,10 @@
 
 	<div class="card-subtitle"><strong>Effets secondaires</strong>
 
-		<div *ngIf="!showAllEffects" [innerHTML]="getShortEffects(medoc.side_effect)"></div>
+		<div *ngIf="!showAllEffects" [innerHTML]="getShortEffects(medoc.effects)"></div>
 		<button *ngIf="!showAllEffects" (click)="seeAllDetails()">Voir les détails</button>
 
-		<div *ngIf="showAllEffects" [innerHTML]="medoc.side_effect"></div>
+		<div *ngIf="showAllEffects" [innerHTML]="medoc.effects"></div>
+		<button *ngIf="showAllEffects" (click)="hideAllDetails()">Cacher les détails</button>
 	</div>
 </div>

@@ -55,7 +55,7 @@ export class HomePage {
 
 			console.log(this.medoc);
 
-			if(this.medoc.side_effect.length > 100) {
+			if(this.medoc.effects.length > 100) {
 				this.showAllEffects = false;
 			}
 		});
@@ -73,9 +73,13 @@ export class HomePage {
 			}
 		}
 
-		// Event on click, disable truncate string for side_effects
+		// Event on click, disable truncate string for effectss
 		public seeAllDetails() {
 			this.showAllEffects = true;
+		}
+
+		public hideAllDetails() {
+			this.showAllEffects = false;
 		}
 
 		public changeMedoc(medoc) {
@@ -89,7 +93,7 @@ export class HomePage {
 					this.setMedoc(this.elements[i]);
 					this.setRecentResearch(this.elements[i]);
 
-					if(this.medoc.side_effect.length > 100) {
+					if(this.medoc.effects.length > 100) {
 						this.showAllEffects = false;
 					}
 				}

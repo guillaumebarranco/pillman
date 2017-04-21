@@ -68,13 +68,14 @@ search-element {
 	display: block;
 	height: 100%;
 
-	.dark {
-		background-color: #000;
-	}
-
 	&[hidden] {
 		display: none;
 	}
+}
+
+page-home.page {
+	min-height: 100%;
+	height: auto;
 }
 
 /******************/

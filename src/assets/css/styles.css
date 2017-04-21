@@ -49,10 +49,12 @@ search-element input {
   padding: 20px;
   display: block;
   height: 100%; }
-  .page .dark {
-    background-color: #000; }
   .page[hidden] {
     display: none; }
+
+page-home.page {
+  min-height: 100%;
+  height: auto; }
 
 /******************/
 /*      MENU      */

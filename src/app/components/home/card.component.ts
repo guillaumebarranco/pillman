@@ -33,4 +33,8 @@ export class CardComponent {
 	public seeAllDetails() {
 		this.showAllEffects = true;
 	}
+
+	public hideAllDetails() {
+		this.showAllEffects = false;
+	}	
 }
