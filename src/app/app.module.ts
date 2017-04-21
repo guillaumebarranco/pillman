@@ -24,7 +24,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 // import { Typeahead } from 'ng2-typeahead';
 import { UiSwitchModule } from 'angular2-ui-switch';
 
-import { AppComponent }   from './app.component';
+import { AppComponent }   from './main/app.component';
 
 /*****************/
 /*   COMPONENTS  */
@@ -35,12 +35,11 @@ import { OptionsPage } from './components/options/options.component';
 import { HomePage } from './components/home/home.component';
 
 // import { SlidesComponent } from './components/slides.component';
-import { SlidesComponent } from './components/fakeSlides.component';
+import { SlidesComponent } from './components/utils/fakeSlides.component';
 import { MenuComponent } from './components/utils/menu.component';
-import { FilterComponent } from './components/filter.component';
 import { TypesearchComponent } from './components/filters/typesearch.component';
 
-import { PillmanComponent } from './components/pillman.component';
+import { PillmanComponent } from './components/utils/pillman.component';
 
 import { SearchComponent } from './components/home/search.component';
 import { AftersearchComponent } from './components/home/aftersearch.component';
@@ -79,7 +78,6 @@ const components = [
     SlidesComponent,
     MenuComponent,
     PillmanComponent,
-    FilterComponent,
     TypesearchComponent,
     SearchComponent,
     AftersearchComponent,

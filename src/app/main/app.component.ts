@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import Medoc from './classes/medoc';
+import Medoc from '../classes/medoc';
 
-import { ApiService } from './services/api.service';
-import { UtilService } from './services/util.service';
+import { ApiService } from '../services/api.service';
+import { UtilService } from '../services/util.service';
 
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
