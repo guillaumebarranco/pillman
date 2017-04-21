@@ -6,15 +6,7 @@ import { ApiService } from './../../services/api.service';
 	selector: 'page-home',
 	templateUrl: './home.html',
 	providers: [ApiService],
-	styles: [`
-
-		filter-typesearch {
-			position: absolute;
-		    top: 100px;
-		    width: 100px;
-		    right: 20px;
-		}
-	`]
+	styles: []
 })
 
 export class HomePage {

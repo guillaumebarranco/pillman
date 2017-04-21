@@ -18,6 +18,9 @@ export class OptionsPage {
 
 	constructor(private utilService: UtilService, private apiService: ApiService) {
 
+		this.getTheme();
+		console.log('this theme', this.theme);
+
 		if(typeof localStorage.getItem('firstname') !== null) {
 			this.username = localStorage.getItem('firstname');
 		}
@@ -43,5 +46,12 @@ export class OptionsPage {
 				this.text = "Il n'y a pas de nouvelle mise à jour disponible";
 			}
 		});
+	}
+
+	private getTheme() {
+
+		if(localStorage.getItem('theme') !== null) {
+			this.theme = localStorage.getItem('theme');
+		}
 	}
 }
