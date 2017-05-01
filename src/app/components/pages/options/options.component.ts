@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { UtilService } from '../../../services/util.service';
 import { ApiService } from '../../../services/api.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
 	selector: 'page-options',
 	templateUrl: './options.html',
-	providers: [UtilService, ApiService]
+	providers: [UtilService, ApiService, SessionService]
 })
 
 export class OptionsPage {
@@ -16,29 +17,27 @@ export class OptionsPage {
 	username: string;
 	text: string;
 
-	constructor(private utilService: UtilService, private apiService: ApiService) {
+	constructor(private utilService: UtilService, private apiService: ApiService, private sessionService: SessionService) {
 
 		this.getTheme();
-		console.log('this theme', this.theme);
 
-		if(typeof localStorage.getItem('firstname') !== null) {
-			this.username = localStorage.getItem('firstname');
+		if(this.sessionService.firstnameExists()) {
+			this.username = this.sessionService.getFirstname();
 		}
 	}
 
 	public updateTheme() {
-		localStorage.setItem("theme", this.theme);
+		this.sessionService.setTheme(this.theme);
 		this.changeTheme.emit(this.theme);
 	}
 
 	public updateUsername() {
-		localStorage.setItem("firstname", this.username);
+		this.sessionService.setFirstname(this.username);
 	}
 
 	public makeMaj() {
-		this.utilService.checkMaj(this.apiService).then((response) => {
 
-			console.log('to do', response);
+		this.utilService.checkMaj(this.apiService).then((response) => {
 
 			if(response) {
 				this.updateMajStatus.emit();
@@ -50,8 +49,8 @@ export class OptionsPage {
 
 	private getTheme() {
 
-		if(localStorage.getItem('theme') !== null) {
-			this.theme = localStorage.getItem('theme');
+		if(this.sessionService.themeExists()) {
+			this.theme = this.sessionService.getTheme();
 		}
 	}
 }

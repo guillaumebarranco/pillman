@@ -7,11 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 		<div *ngIf="enabled">Par Denomination</div>
 		<div *ngIf="!enabled">Par Nom</div>
-	`,
-	styles: [`
-		
-		text-align: center;
-	`]
+	`
 })
 
 export class TypesearchComponent {

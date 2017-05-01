@@ -13,6 +13,9 @@ body {
   padding: 0;
   margin: 0; }
 
+h1 {
+  text-align: center; }
+
 h1, h2 {
   font-family: "Oswald", sans-serif; }
 
@@ -62,9 +65,9 @@ page-home.page {
 my-menu {
   background-color: #F26F70;
   width: 100%;
-  height: 200px;
-  padding-top: 50px;
+  height: 100px;
   transition: 0.4s;
+  margin-top: -50px;
   z-index: 2;
   display: block;
   /* Basic Config

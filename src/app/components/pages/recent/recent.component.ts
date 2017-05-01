@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { SessionService } from '../../../services/session.service';
+
 @Component({
 	selector: 'page-recent',
 	templateUrl: './recent.html',
@@ -8,7 +10,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 		.recentResearch {
 			margin-top: 10px;
 		}
-	`]
+	`],
+	providers: [SessionService]
 })
 
 export class RecentPage {
@@ -19,14 +22,13 @@ export class RecentPage {
 	recentResearch: any;
 	nbResearchsShow: number = 10;
 
-	constructor() {}
+	constructor(private sessionService: SessionService) {}
 
 	ngOnInit() {
 		this.getRecentResearch();
 	}
 
 	changeResearch(medoc) {
-		console.log('medoc', medoc);
 		this.medoc = medoc;
 		this.medocChange.emit(medoc);
 	}
@@ -39,8 +41,8 @@ export class RecentPage {
 
 		this.recentResearch = [];
 
-		if(localStorage.getItem("recentResearch") !== null) {
-			this.recentResearch = JSON.parse(localStorage.getItem("recentResearch"));
+		if(this.sessionService.recentResearchExists()) {
+			this.recentResearch = this.sessionService.getRecentResearch();
 		}
 	}
 }

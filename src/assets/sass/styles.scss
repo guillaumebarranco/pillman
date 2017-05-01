@@ -21,6 +21,10 @@ body {
 	margin: 0;
 }
 
+h1 {
+	text-align: center;
+}
+
 h1, h2 {
 	font-family: $secondfont, sans-serif;
 }
@@ -86,16 +90,16 @@ my-menu {
 
 	background-color: $maincolor;
 
-	&.dark {
-		background-color: #000;
-	}
-
 	width: 100%;
-    height: 200px;
-    padding-top: 50px;
+    height: 100px;
     transition: 0.4s;
+    margin-top: -50px;
     z-index: 2;
     display: block;
+
+    &.dark {
+		background-color: #000;
+	}
 
 	/* Basic Config
 	 * $nav-size (px) sets the size of the menu button

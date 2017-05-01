@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 
 import { ApiService } from '../../../services/api.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.html',
-	providers: [ApiService],
+	providers: [ApiService, SessionService],
 	styles: []
 })
 
@@ -25,7 +26,7 @@ export class HomePage {
 
 	labos						: string[];
 
-	constructor(private apiService: ApiService) {
+	constructor(private apiService: ApiService, private sessionService: SessionService) {
 
 		this.setSearchType();
 		this.elements = [];
@@ -45,15 +46,8 @@ export class HomePage {
 		this.apiService.getMedocs().subscribe(medocs => {
 			this.hideLoader();
 
-			// console.log(medocs);
-			console.log(medocs.json());
-
-			// this.elements = this.formateMedocs(medocs.json());
-			this.elements = this.formateMedocs(medocs.json().slice(0, 15));
-			// console.log(this.elements);
+			this.elements = this.formateMedocs(medocs.json());
 			this.medoc = this.elements[0];
-
-			console.log(this.medoc);
 
 			if(this.medoc.effects.length > 100) {
 				this.showAllEffects = false;
@@ -134,26 +128,18 @@ export class HomePage {
 		}
 
 		public sessionSearchTypeExists() {
-
-			if(
-				localStorage.getItem("searchType") !== null 
-				&& (localStorage.getItem("searchType") === "name" || localStorage.getItem("searchType") === "dci")
-			) {
-				return true;
-			}
-
-			return false;
+			return this.sessionService.sessionSearchTypeExists();
 		}
 
 		changeSearchType(searchType) {
 			this.searchType = searchType;
-			localStorage.setItem('searchType', searchType);
+			this.sessionService.setSearchType(searchType);
 		}
 
 		private setSearchType() {
 
 			if(this.sessionSearchTypeExists()) {
-				this.searchType = localStorage.getItem("searchType");
+				this.searchType = this.sessionService.getSearchType();
 			} else {
 				this.searchType = "name";
 			}
@@ -163,15 +149,12 @@ export class HomePage {
 
 			if(recent !== null) {
 
-				if(localStorage.getItem("recentResearch") !== null) {
+				if(this.sessionService.recentResearchExists()) {
 
-					var recentResearch = JSON.parse(localStorage.getItem("recentResearch"));
+					let recentResearch = this.sessionService.getRecentResearch();
+					let canPush = true;
 
-					// console.log(recentResearch);
-
-					var canPush = true;
-
-					for(var i in recentResearch) {
+					for(const i in recentResearch) {
 
 						if(recentResearch[i].name === recent.name) {
 							canPush = false;
@@ -180,14 +163,14 @@ export class HomePage {
 
 					if(canPush) {
 						recentResearch.push(recent);
-						localStorage.setItem("recentResearch", JSON.stringify(recentResearch));
+						this.sessionService.setRecentResearch(JSON.stringify(recentResearch));
 					}
 
 				} else {
-					localStorage.setItem("recentResearch", JSON.stringify([recent]));
+					this.sessionService.setRecentResearch(JSON.stringify([recent]));
 				}
 
-				this.recentResearch = JSON.parse(localStorage.getItem("recentResearch"));
+				this.recentResearch = this.sessionService.getRecentResearch();
 			}
 		}
 
@@ -218,7 +201,7 @@ export class HomePage {
 		}
 
 		public updateSearchType() {
-			localStorage.setItem("searchType", this.searchType);
+			this.sessionService.setSearchType(this.searchType);
 			window.location.reload();
 		}
 
@@ -234,8 +217,8 @@ export class HomePage {
 
 		private getRecentResearch() {
 
-			if(localStorage.getItem("recentResearch") !== null) {
-				return JSON.parse(localStorage.getItem("recentResearch"));
+			if(this.sessionService.recentResearchExists()) {
+				return this.sessionService.getRecentResearch();
 			}
 
 			return [];

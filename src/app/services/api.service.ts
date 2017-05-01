@@ -47,12 +47,12 @@ export class ApiService {
 
 	public getMedocs() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocs&limit=100");
-		return this.http.get("http://localhost:8181/all/150");
+		return this.http.get("http://92.222.34.194:8181/all/150");
 	}
 
 	public getLastVersion() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocsVersion");
-		return this.http.get("http://localhost:8181/version");
+		return this.http.get("http://92.222.34.194:8181/version");
 
 	}
 

@@ -3,6 +3,7 @@ import Medoc from '../classes/medoc';
 
 import { ApiService } from '../services/api.service';
 import { UtilService } from '../services/util.service';
+import { SessionService } from '../services/session.service';
 
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
@@ -10,7 +11,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 @Component({
     selector: 'pillman',
     templateUrl: './app.html',
-    providers: [ApiService, UtilService]
+    providers: [ApiService, UtilService, SessionService]
 })
 
 export class AppComponent {
@@ -24,7 +25,7 @@ export class AppComponent {
     /*       APP INIT       */
     /************************/
 
-        constructor(platform: Platform, private apiService: ApiService, private utilService: UtilService) {
+        constructor(platform: Platform, private apiService: ApiService, private utilService: UtilService, private sessionService: SessionService) {
 
             platform.ready().then(() => {
                 StatusBar.styleDefault();
@@ -97,14 +98,38 @@ export class AppComponent {
             return this.currentPage;
         }
 
+        public getCurrentTitle(page) {
+
+            let title = "";
+
+            switch (page) {
+
+                case "home":
+                    title = "Accueil";
+                break;
+
+                case "options":
+                    title = "Paramètres";
+                break;
+
+                case "recent":
+                    title = "Recherches récentes";
+                break;
+                
+                default: break;
+            }
+
+            return title;
+        }
+
         public setCurrentPage(page) {
             this.currentPage = page;
         }
 
         public getTheme() {
 
-            if(localStorage.getItem("theme") !== null) {
-                return localStorage.getItem("theme");
+            if(this.sessionService.themeExists()) {
+                return this.sessionService.getTheme();
             }
 
             return "default-theme";

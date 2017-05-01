@@ -3,6 +3,8 @@ import { Platform } from 'ionic-angular';
 
 import { ApiService } from '../../../services/api.service';
 import { DBService } from '../../../services/db.service';
+import { SessionService } from '../../../services/session.service';
+
 import Medoc from '../../../classes/medoc';
 
 declare var navigator: any;
@@ -16,8 +18,12 @@ declare var Connection: any;
 		div {
 			color: black;
 		}
+
+		.page {
+			text-align: center;
+		}
 	`],
-	providers: [ApiService, DBService]
+	providers: [ApiService, DBService, SessionService]
 })
 
 export class MajPage {
@@ -28,12 +34,7 @@ export class MajPage {
 	hello			:		string;
 	theme = "default";
 
-	constructor(platform: Platform, private apiService: ApiService, private dbService: DBService) {
-
-        platform.ready().then(() => {        	
-        	this.checkNetwork();
-        });
-
+	constructor(public platform: Platform, private apiService: ApiService, private dbService: DBService, private sessionService: SessionService) {
         this.hello = this.getHelloText();
     }
 
@@ -50,8 +51,8 @@ export class MajPage {
         	hello = "Bonsoir";
         }
 
-        if(typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null) {
-        	hello += " " + localStorage.getItem('firstname');
+        if(this.sessionService.firstnameExists()) {
+        	hello += " " + this.sessionService.getFirstname();
         } else {
         	hello += ' à vous';
         }
@@ -63,30 +64,41 @@ export class MajPage {
 
 		if(agreed) {
 
-			this.majStarted = true;
-			this.majDone = false;
-			this.medocs = [];
+			this.platform.ready().then(() => {  
 
-			console.log('begin maj');
+	        	this.checkNetwork((response) => {
 
-			this.getMedocs().then((medocs) => {
+	        		if(response) {
 
-				this.dbService.makeMaj(medocs, (response) => {
+						this.majStarted = true;
+						this.majDone = false;
+						this.medocs = [];
 
-					this.medocs = response;
-					this.majDone = true;
+						console.log('begin maj');
 
-					localStorage.setItem('lastMajVersion', localStorage.getItem('currentApiVersion'));
+						this.getMedocs().then((medocs) => {
 
-					console.log('end maj', this.medocs);
-				});
-			});
+							this.dbService.makeMaj(medocs, (response) => {
+
+								this.medocs = response;
+								this.majDone = true;
+
+								this.sessionService.setLastMajVersion(this.sessionService.getCurrentApiVersion())
+
+								console.log('end maj', this.medocs);
+							});
+						});
+
+					} else {
+						console.log('not on wifi');
+					}
+	        	});
+	        });
 
 		} else {
-
 			this.updateNextMajProposalDate();
 			this.updateMaj();
-		}
+		}		
 	}
 
 	updateNextMajProposalDate() {
@@ -97,8 +109,8 @@ export class MajPage {
 		const timestamp = nextweek.getTime();
 		const wait = true;
 
-		localStorage.setItem('nextProposalUpdate', timestamp.toString());
-		localStorage.setItem('waitForProposal', wait.toString());
+		this.sessionService.setNextProposalUpdate(timestamp.toString());
+		this.sessionService.setWaitForProposal(wait.toString());
 	}
 
 	getMedocs() {
@@ -115,7 +127,7 @@ export class MajPage {
 		return datas;
 	}
 
-	checkNetwork() {
+	checkNetwork(callback) {
 
 		if(navigator && navigator.connection) {
 
@@ -133,11 +145,14 @@ export class MajPage {
 
 	        if(networkState === Connection.WIFI) {
 	        	console.log('is wifi');
+	        	return callback(true);
 	        }
 
 		} else {
 			console.log("You are not on a device which can detect you Internet connection");
 		}
+
+		return callback(false);
     }
 
 	updateMaj() {
