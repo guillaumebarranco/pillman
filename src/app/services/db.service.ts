@@ -5,14 +5,14 @@ export class DBService {
 
 	constructor() {}
 
-	getDB() {
+	public getDB() {
 		return SQLite.openDatabase({
 			name: 'data.db',
 			location: 'default'
 		});
 	}
 
-	makeMaj(medocs, callback) {
+	public makeMaj(medocs, callback) {
 		this.medocs = [];
 
 		this.getDB().then((db: SQLite) => {
@@ -42,7 +42,7 @@ export class DBService {
 		});
 	}
 
-	handleMedocTable(db, medocs, callback) {
+	private handleMedocTable(db, medocs, callback) {
 
 		// this.createMedocTable(db, () => {
 
@@ -77,7 +77,7 @@ export class DBService {
 		// });
 	}
 
-	createMedocTable(db, callback) {
+	private createMedocTable(db, callback) {
 
 		const query = 'CREATE TABLE IF NOT EXISTS medicaments (id int(11) NOT NULL,name varchar(255) NOT NULL,cis varchar(255) NOT NULL,dci varchar(255) NOT NULL,effects longtext NOT NULL,forme varchar(255) NOT NULL, PRIMARY KEY (id));'
 		;
@@ -101,7 +101,7 @@ export class DBService {
 		});
 	}
 
-	insertMedoc(db, callback) {
+	private insertMedoc(db, callback) {
 
 		const query = "INSERT INTO medicaments (name) VALUES (?);";
 
@@ -127,7 +127,7 @@ export class DBService {
 		});
 	}
 
-	deleteTable(db, callback) {
+	private deleteTable(db, callback) {
 		const query = "DROP TABLE medicaments";
 
 		db.transaction(function(tx) {

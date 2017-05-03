@@ -2,84 +2,104 @@ export class SessionService {
 
 	constructor() {}
 
-	sessionSearchTypeExists() {
-		return localStorage.getItem("searchType") !== null &&
-			(localStorage.getItem("searchType") === "name" || localStorage.getItem("searchType") === "dci");
-	}
+	/**********************/
+	/*     Search type    */
+	/**********************/
 
-	setSearchType(searchType) {
-		localStorage.setItem('searchType', searchType);
-	}
+		sessionSearchTypeExists() {
+			return localStorage.getItem("searchType") !== null &&
+				(localStorage.getItem("searchType") === "name" || localStorage.getItem("searchType") === "dci");
+		}
 
-	getSearchType() {
-		return localStorage.getItem("searchType");
-	}
+		setSearchType(searchType) {
+			localStorage.setItem('searchType', searchType);
+		}
 
-	recentResearchExists() {
-		return localStorage.getItem("recentResearch") !== null;
-	}
+		getSearchType() {
+			return localStorage.getItem("searchType");
+		}
 
-	setRecentResearch(element) {
-		localStorage.setItem("recentResearch", element);
-	}
+	/**********************/
+	/*       Theme        */
+	/**********************/
 
-	getRecentResearch() {
-		return JSON.parse(localStorage.getItem("recentResearch"));
-	}
+		themeExists() {
+			return localStorage.getItem("theme") !== null;
+		}
 
-	firstnameExists() {
-		return typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null;
-	}
+		getTheme() {
+			return localStorage.getItem('theme');
+		}
 
-	getFirstname() {
-		return localStorage.getItem('firstname');
-	}
+		setTheme(theme) {
+			return localStorage.setItem('theme', theme);
+		}
 
-	setFirstname(firstname) {
-		localStorage.setItem('firstname', firstname);
-	}
+	/**********************/
+	/*   Recent research  */
+	/**********************/
 
-	getLastMajVersion() {
-		return localStorage.getItem('lastMajVersion');
-	}
+		recentResearchExists() {
+			return localStorage.getItem("recentResearch") !== null;
+		}
 
-	setLastMajVersion(element) {
-		localStorage.setItem('lastMajVersion', element);
-	}
+		setRecentResearch(element) {
+			localStorage.setItem("recentResearch", element);
+		}
 
-	getCurrentApiVersion() {
-		return localStorage.getItem('currentApiVersion');
-	}
+		getRecentResearch() {
+			return JSON.parse(localStorage.getItem("recentResearch"));
+		}
 
-	setCurrentApiVersion(element) {
-		return localStorage.setItem('currentApiVersion', element);
-	}
+	/**********************/
+	/*      Firstname     */
+	/**********************/
 
-	setNextProposalUpdate(element) {
-		localStorage.setItem('nextProposalUpdate', element);
-	}
+		firstnameExists() {
+			return typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null;
+		}
 
-	getNextProposalUpdate() {
-		return localStorage.getItem('nextProposalUpdate');
-	}
+		getFirstname() {
+			return localStorage.getItem('firstname');
+		}
 
-	getWaitForProposal() {
-		return localStorage.getItem('waitForProposal');
-	}
+		setFirstname(firstname) {
+			localStorage.setItem('firstname', firstname);
+		}
 
-	setWaitForProposal(element) {
-		localStorage.setItem('waitForProposal', element);
-	}
+	/**********************/
+	/*      Maj Items     */
+	/**********************/
 
-	themeExists() {
-		return localStorage.getItem("theme") !== null;
-	}
+		getLastMajVersion() {
+			return localStorage.getItem('lastMajVersion');
+		}
 
-	getTheme() {
-		return localStorage.getItem('theme');
-	}
+		setLastMajVersion(element) {
+			localStorage.setItem('lastMajVersion', element);
+		}
 
-	setTheme(theme) {
-		return localStorage.setItem('theme', theme);
-	}
+		getCurrentApiVersion() {
+			return localStorage.getItem('currentApiVersion');
+		}
+
+		setCurrentApiVersion(element) {
+			return localStorage.setItem('currentApiVersion', element);
+		}
+
+		setNextProposalUpdate(element) {
+			localStorage.setItem('nextProposalUpdate', element);
+		}
+
+		getNextProposalUpdate() {
+			return localStorage.getItem('nextProposalUpdate');
+		}
+
+		getWaitForProposal() {
+			return localStorage.getItem('waitForProposal');
+		}
+
+		setWaitForProposal(element) {
+			localStorage.setItem('waitForProposal', element);
+		}
 }

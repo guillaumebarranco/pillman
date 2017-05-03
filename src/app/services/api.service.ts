@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 
 export class ApiService {
-	baseUrl 		: string 		= "";
+	baseUrl : string = "";
 
 	constructor(public http: Http) {}
 
@@ -71,6 +71,4 @@ export class ApiService {
 	public getAppLastMedocsVersion() : Observable<Response> {
 		return this.http.get('assets/files/majVersion.json');
 	}
-
-	
 }

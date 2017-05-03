@@ -72,8 +72,11 @@ const components = [
     MajPage
 ];
 
-const providers = [
-];
+const providers = [];
+
+/********************/
+/*       MAIN       */
+/********************/
 
 @NgModule({
     imports: modules,

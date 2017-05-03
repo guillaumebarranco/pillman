@@ -1,17 +1,14 @@
-import { ApiService } from './api.service';
-
 export class UtilService {
 
 	constructor() {
 	}
 
-    checkMaj(apiService) {
+    public checkMaj(apiService) {
 
     	return new Promise((resolve, reject) => {
 
-			this.getAppLastMedocsVersion(apiService, (appVersionString) => {
-
-	            const appVersion = appVersionString;
+    		// First we get version from application
+			this.getAppLastMedocsVersion((appVersion) => {
 
 	            apiService.getLastVersion().subscribe((apiVersionString) => {
 
@@ -19,33 +16,37 @@ export class UtilService {
 
 	                localStorage.setItem('currentApiVersion', apiVersion);
 
-	                if(appVersion.lastVersion !== apiVersion.Version) {
-
-	                    const appVersionParsed = this.getSplitedVersion(appVersion.lastVersion);
-	                    const apiVersionParsed = this.getSplitedVersion(apiVersion.Version);
-	                    const currentDate = new Date();
-
-	                    if(
-	                        (appVersionParsed.x > apiVersionParsed.x) ||
-	                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y > apiVersionParsed.y) ||
-	                        (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y <= apiVersionParsed.y
-	                            && appVersionParsed.z > apiVersionParsed.z) ||
-	                        (appVersion.wait && appVersion.waitTime > currentDate.getTime()) // If the remind date is after the current date
-	                    ) {
-	                        return resolve(false);
-	                    }
-
-	                    return resolve(true);
-	                }
-
-	                return resolve(false);
+	                return resolve(this.isApiVersionNewer(appVersion, apiVersion));
 	            });
 	        });
     	})
     }
 
-    getAppLastMedocsVersion(apiService, callback) {
+    private isApiVersionNewer(appVersion, apiVersion) {
 
+    	if(appVersion.lastVersion !== apiVersion.Version) {
+
+            const appVersionParsed = this.getSplitedVersion(appVersion.lastVersion);
+            const apiVersionParsed = this.getSplitedVersion(apiVersion.Version);
+            const currentDate = new Date();
+
+            if(
+                (appVersionParsed.x > apiVersionParsed.x) || // If api.x newer than app.x
+                (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y > apiVersionParsed.y) ||
+                (appVersionParsed.x <= apiVersionParsed.x && appVersionParsed.y <= apiVersionParsed.y
+                    && appVersionParsed.z > apiVersionParsed.z) ||
+                (appVersion.wait && appVersion.waitTime > currentDate.getTime()) // If the remind date is after the current date
+            ) {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public getAppLastMedocsVersion(callback) {
 
     	if(localStorage.getItem('lastMajVersion') !== null) {
 
@@ -54,15 +55,12 @@ export class UtilService {
     		});
 
     	} else {
+    		localStorage.setItem('lastMajVersion', "0.0.0");
     		callback({lastVersion: "0.0.0"})
     	}
-
-        // apiService.getAppLastMedocsVersion().subscribe(response => {
-        //     callback(response);
-        // });
     }
 
-	getSplitedVersion(stringVersion) {
+	public getSplitedVersion(stringVersion) {
 
         const version = stringVersion.split('.');
 
