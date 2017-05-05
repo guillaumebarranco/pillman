@@ -45,9 +45,9 @@ export class ApiService {
 	// 	return this.http.get("http://92.222.34.194/medoc/serveur.php"+url);
 	// }
 
-	public getMedocs() : Observable<Response> {
+	public getMedocs(limit = 150) : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocs&limit=100");
-		return this.http.get("http://92.222.34.194:8181/all/150");
+		return this.http.get("http://92.222.34.194:8181/all/"+limit);
 	}
 
 	public getLastVersion() : Observable<Response> {
@@ -66,9 +66,5 @@ export class ApiService {
 
 	public getAppDatas() : Observable<Response> {
 		return this.http.get('assets/content/app.json');
-	}
-
-	public getAppLastMedocsVersion() : Observable<Response> {
-		return this.http.get('assets/files/majVersion.json');
 	}
 }

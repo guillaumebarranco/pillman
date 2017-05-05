@@ -16,10 +16,12 @@ export class OptionsPage {
 	@Output() updateMajStatus = new EventEmitter();
 	username: string;
 	text: string;
+	majVersion: string = '0.0.0';
 
 	constructor(private utilService: UtilService, private apiService: ApiService, private sessionService: SessionService) {
 
 		this.getTheme();
+		this.majVersion = this.sessionService.getLastMajVersion();
 
 		if(this.sessionService.firstnameExists()) {
 			this.username = this.sessionService.getFirstname();
@@ -37,7 +39,7 @@ export class OptionsPage {
 
 	public makeMaj() {
 
-		this.utilService.checkMaj(this.apiService).then((response) => {
+		this.utilService.checkMaj(true).then((response) => {
 
 			if(response) {
 				this.updateMajStatus.emit();

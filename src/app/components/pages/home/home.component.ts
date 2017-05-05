@@ -43,16 +43,16 @@ export class HomePage {
 
 	getMedocs() {
 
-		this.apiService.getMedocs().subscribe(medocs => {
-			this.hideLoader();
+		const recentResearch = this.sessionService.getRecentResearch();
 
-			this.elements = this.formateMedocs(medocs.json());
-			this.medoc = this.elements[0];
+		if(typeof recentResearch[0] !== "undefined") {
 
-			if(this.medoc.effects.length > 100) {
+			this.medoc = recentResearch[recentResearch.length - 1];
+
+			if(typeof this.medoc.effects !== "undefined" && this.medoc.effects.length > 100) {
 				this.showAllEffects = false;
 			}
-		});
+		}
 	}
 
 	/*********************/

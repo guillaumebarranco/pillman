@@ -146,4 +146,35 @@ export class DBService {
 			});
 		});
 	}
+
+	public searchMedoc(first) {
+
+		return new Promise((resolve, reject) => {
+
+			this.getDB().then((db: SQLite) => {
+
+				const elements = 'name, cis, dci, effects, forme';
+				const querySelect = 'SELECT * FROM medicaments';
+
+				db.transaction(function(tx) {
+
+					tx.executeSql(querySelect, [], function(tx, rs) {
+
+						resolve({
+							status:'success', 
+							data: rs
+						});
+
+					}, function(tx, error) {
+						console.log('SELECT error: ' + error.message);
+
+						resolve({
+							status: 'error'
+						});
+					});
+				});
+			});
+		});
+
+	}
 }

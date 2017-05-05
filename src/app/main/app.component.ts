@@ -52,7 +52,7 @@ export class AppComponent {
 
     checkMaj() {
 
-        this.utilService.checkMaj(this.apiService).then((response) => {
+        this.utilService.checkMaj().then((response) => {
             this.majToDo = response ? true: false;
         });
     }

@@ -1,4 +1,4 @@
-<div *ngIf="elements[0]">
+<div *ngIf="medocExists()">
 	<div *ngIf="searchType == 'name'" class="card-title"><strong>Nom</strong> {{medoc.name}}</div>
 	<div class="card-subtitle"><strong>DCI</strong> {{medoc.dci}}</div>
 	<div class="card-subtitle"><strong>Forme</strong> {{medoc.forme}}</div>

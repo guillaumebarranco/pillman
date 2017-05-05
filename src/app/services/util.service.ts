@@ -1,25 +1,50 @@
+import { ApiService } from './api.service';
+import { SessionService } from './session.service';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+
 export class UtilService {
 
-	constructor() {
+	constructor(public apiService: ApiService, public sessionService: SessionService) {
 	}
 
-    public checkMaj(apiService) {
+    public checkMaj(asked = false) {
 
     	return new Promise((resolve, reject) => {
 
-    		// First we get version from application
-			this.getAppLastMedocsVersion((appVersion) => {
+            // Then we get version from application
+            this.delayedMajDecided((delayed) => {
 
-	            apiService.getLastVersion().subscribe((apiVersionString) => {
+                if(!delayed || asked) {
 
-	                const apiVersion = apiVersionString.json()[0];
+            		// Then we get version from application
+        			this.getAppLastMedocsVersion((appVersion) => {
 
-	                localStorage.setItem('currentApiVersion', apiVersion);
+        	            this.apiService.getLastVersion().subscribe((apiVersionString) => {
 
-	                return resolve(this.isApiVersionNewer(appVersion, apiVersion));
-	            });
-	        });
-    	})
+        	                const apiVersion = apiVersionString.json()[0];
+
+                            this.sessionService.setCurrentApiVersion(apiVersion);
+
+        	                return resolve(this.isApiVersionNewer(appVersion, apiVersion));
+        	            });
+        	        });
+
+                } else {
+                    return resolve(false);
+                }
+        	});
+        });
+    }
+
+    private delayedMajDecided(callback) {
+
+        if(this.sessionService.getWaitForProposal() == 'true') {
+            return callback(true);
+        }
+
+        return callback(false);
     }
 
     private isApiVersionNewer(appVersion, apiVersion) {

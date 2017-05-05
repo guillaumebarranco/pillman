@@ -7,13 +7,16 @@ import { Component, Input } from '@angular/core';
 
 export class CardComponent {
 	@Input() searchType;
-	@Input() elements;
 	@Input() medoc;
 
 	showAllEffects: any = false;
 
 	constructor() {
 
+	}
+
+	medocExists() {
+		return this.medoc !== [] && typeof this.medoc.name !== "undefined";
 	}
 
 	// Return side_effects of medicament with string truncated

@@ -21,6 +21,12 @@ declare var Connection: any;
 
 		.page {
 			text-align: center;
+			margin-top: 100px;
+		}
+
+		.buttons-maj  {
+			display: flex;
+			justify-content: space-around;
 		}
 	`],
 	providers: [ApiService, DBService, SessionService]
@@ -112,6 +118,9 @@ export class MajPage {
 
 		this.sessionService.setNextProposalUpdate(timestamp.toString());
 		this.sessionService.setWaitForProposal(wait.toString());
+
+		console.log(localStorage.getItem('nextProposalUpdate'));
+		console.log(localStorage.getItem('waitForProposal'));
 	}
 
 	getMedocs() {

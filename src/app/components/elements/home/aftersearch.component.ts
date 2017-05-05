@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
+import { DBService } from '../../../services/db.service';
 
 @Component({
 	selector: 'aftersearch-element',
 	templateUrl: './aftersearch.html',
-	providers: [ApiService],
+	providers: [ApiService, DBService],
 	styles: [`
 		
 		li {
@@ -24,7 +25,7 @@ export class AftersearchComponent {
 
 	propos: any = [];
 
-	constructor(private apiService: ApiService) {
+	constructor(private apiService: ApiService, private dbService: DBService) {
 
 		setInterval(() => {
 
@@ -57,10 +58,12 @@ export class AftersearchComponent {
 
 	launchMatch() {
 
-		// var which = this.search.substr(0,1).toLowerCase();
+		const which = this.search.substr(0,1).toLowerCase();
+		
+		// this.dbService.searchMedoc(which).then(medocs => {
+			// this.elements = medocs;
 
-		this.apiService.getMedocs().subscribe(medocs => {
-			// this.apiService.getMedocs(which).subscribe(medocs => {
+		this.apiService.getMedocs(1000).subscribe(medocs => {
 			this.elements = medocs.json();
 
 			for(var element of this.elements) {

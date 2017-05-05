@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 	selector: 'pillman-svg',
 	template: `
 
-		<img src="./assets/img/pillman.svg" width="350" />
+		<img src="./assets/img/pillman.svg" width="{{width}}" />
 		<bubble [text]="text"></bubble>
 	`,
 	styles: [`
@@ -18,6 +18,7 @@ import { Component, Input } from '@angular/core';
 
 export class PillmanComponent {
 	@Input() text;
+	@Input() width = 350;
 
 	constructor() {
 	}
