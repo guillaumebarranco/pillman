@@ -4,6 +4,8 @@ import { ApiService } from '../../../services/api.service';
 import { SessionService } from '../../../services/session.service';
 import { UtilService } from '../../../services/util.service';
 
+import Medoc from '../../../classes/medoc';
+
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.html',
@@ -79,9 +81,7 @@ export class HomePage {
 
 		public changeMedoc(medoc: Medoc) {
 
-			if(typeof medoc.cis !== "undefined") medoc = medoc.cis;
-
-			for(let i in this.elements) {
+			for(const i in this.elements) {
 
 				if(this.elements[i].cis === medoc) {
 
