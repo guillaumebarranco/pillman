@@ -33,6 +33,7 @@ export class MajPage {
 	majStarted 		: 		boolean 	= false;
 	hello			:		string;
 	theme = "default";
+	text 			: 		string 		= "Une mise à jour est disponible";
 
 	constructor(public platform: Platform, private apiService: ApiService, private dbService: DBService, private sessionService: SessionService) {
         this.hello = this.getHelloText();

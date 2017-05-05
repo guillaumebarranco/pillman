@@ -51,7 +51,7 @@ export class UtilService {
     	if(localStorage.getItem('lastMajVersion') !== null) {
 
     		callback({
-    			lastVersion: JSON.parse(localStorage.getItem('lastMajVersion'))
+    			lastVersion: localStorage.getItem('lastMajVersion')
     		});
 
     	} else {

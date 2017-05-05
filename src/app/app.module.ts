@@ -35,6 +35,7 @@ import { MajPage }                   from './components/pages/maj/maj.component'
 import { SlidesComponent }           from './components/utils/fakeSlides.component';
 import { MenuComponent }             from './components/utils/menu.component';
 import { PillmanComponent }          from './components/utils/pillman.component';
+import { BubbleComponent }          from './components/utils/bubble.component';
 
 import { TypesearchComponent }       from './components/elements/home/typesearch.component';
 import { SearchComponent }           from './components/elements/home/search.component';
@@ -61,15 +62,16 @@ const components = [
     RecentPage,
     OptionsPage,
     HomePage,
+    MajPage,
     SlidesComponent,
     MenuComponent,
     PillmanComponent,
+    BubbleComponent,
     TypesearchComponent,
     SearchComponent,
     AftersearchComponent,
     AutocompleteComponent,
-    CardComponent,
-    MajPage
+    CardComponent
 ];
 
 const providers = [];

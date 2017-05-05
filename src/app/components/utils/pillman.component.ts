@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'pillman',
+	selector: 'pillman-svg',
 	template: `
 
-		<!--<div>Hello, I'm Pillman !</div>-->
-		<img src="./media/img/pillman.svg" width="350" />
+		<img src="./assets/img/pillman.svg" width="350" />
+		<bubble [text]="text"></bubble>
 	`,
 	styles: [`
 		img {
@@ -17,6 +17,7 @@ import { Component } from '@angular/core';
 })
 
 export class PillmanComponent {
+	@Input() text;
 
 	constructor() {
 	}
