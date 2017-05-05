@@ -60,7 +60,7 @@ export class HomePage {
 	/*       EVENTS      */
 	/*********************/
 
-		public changeResearch(search) {
+		public changeResearch(search: string = "") {
 
 			if(search !== "") {
 				this.search = search;
@@ -77,7 +77,7 @@ export class HomePage {
 			this.showAllEffects = false;
 		}
 
-		public changeMedoc(medoc) {
+		public changeMedoc(medoc: Medoc) {
 
 			if(typeof medoc.cis !== "undefined") medoc = medoc.cis;
 
@@ -124,7 +124,7 @@ export class HomePage {
 	/*      SETTERS      */
 	/*********************/
 
-		private setMedoc(medoc) {
+		private setMedoc(medoc: Medoc) {
 			this.medoc = medoc;
 		}
 
@@ -132,7 +132,7 @@ export class HomePage {
 			return this.sessionService.sessionSearchTypeExists();
 		}
 
-		changeSearchType(searchType) {
+		changeSearchType(searchType: string) {
 			this.searchType = searchType;
 			this.sessionService.setSearchType(searchType);
 		}
@@ -184,10 +184,10 @@ export class HomePage {
 			window.location.reload();
 		}
 
-		public changeResearchDone(element) {
-			this.medoc = element;
+		public changeResearchDone(medoc: Medoc) {
+			this.medoc = medoc;
 
-			this.sessionService.addRecentResearchElement(element);
+			this.sessionService.addRecentResearchElement(medoc);
 
 			this.showAllEffects = false;
 			this.researchDone = true;

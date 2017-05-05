@@ -9,17 +9,17 @@ export class UtilService {
 	constructor(public apiService: ApiService, public sessionService: SessionService) {
 	}
 
-    public checkMaj(asked = false) {
+    public checkMaj(asked: boolean = false): Promise<any> {
 
     	return new Promise((resolve, reject) => {
 
             // Then we get version from application
-            this.delayedMajDecided((delayed) => {
+            this.delayedMajDecided().then((delayed) => {
 
                 if(!delayed || asked) {
 
             		// Then we get version from application
-        			this.getAppLastMedocsVersion((appVersion) => {
+        			this.getAppLastMedocsVersion().then((appVersion) => {
 
         	            this.apiService.getLastVersion().subscribe((apiVersionString) => {
 
@@ -38,13 +38,16 @@ export class UtilService {
         });
     }
 
-    private delayedMajDecided(callback) {
+    private delayedMajDecided(): Promise<boolean> {
 
-        if(this.sessionService.getWaitForProposal() == 'true') {
-            return callback(true);
-        }
+        return new Promise((resolve, reject) => {
 
-        return callback(false);
+            if(this.sessionService.getWaitForProposal() == 'true') {
+                return resolve(true);
+            }
+
+            return resolve(false);
+        });
     }
 
     private isApiVersionNewer(appVersion, apiVersion) {
@@ -71,21 +74,24 @@ export class UtilService {
         return false;
     }
 
-    public getAppLastMedocsVersion(callback) {
+    public getAppLastMedocsVersion(): Promise<any> {
 
-    	if(localStorage.getItem('lastMajVersion') !== null) {
+        return new Promise((resolve, reject) => {
 
-    		callback({
-    			lastVersion: localStorage.getItem('lastMajVersion')
-    		});
+        	if(localStorage.getItem('lastMajVersion') !== null) {
 
-    	} else {
-    		localStorage.setItem('lastMajVersion', "0.0.0");
-    		callback({lastVersion: "0.0.0"})
-    	}
+        		return resolve({
+        			lastVersion: localStorage.getItem('lastMajVersion')
+        		});
+
+        	} else {
+        		localStorage.setItem('lastMajVersion', "0.0.0");
+        		return resolve({lastVersion: "0.0.0"})
+        	}
+        });
     }
 
-	public getSplitedVersion(stringVersion) {
+	public getSplitedVersion(stringVersion): any {
 
         const version = stringVersion.split('.');
 

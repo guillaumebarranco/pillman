@@ -58,8 +58,6 @@ export class DBService {
 
 		return new Promise((resolve, reject) => {
 
-			// this.createMedocTable(db, () => {
-
 				const elements = 'name, cis, dci, effects, forme';
 
 				const queryCreate = "CREATE TABLE IF NOT EXISTS medicaments ("+elements+")";
@@ -88,62 +86,6 @@ export class DBService {
 						});
 					});
 				});
-			// });
-		});
-	}
-
-	private createMedocTable(db) {
-
-		return new Promise((resolve, reject) => {
-
-			const query = 'CREATE TABLE IF NOT EXISTS medicaments (id int(11) NOT NULL,name varchar(255) NOT NULL,cis varchar(255) NOT NULL,dci varchar(255) NOT NULL,effects longtext NOT NULL,forme varchar(255) NOT NULL, PRIMARY KEY (id));'
-			;
-
-			console.log('db', db);
-
-			db.transaction(function(tx) {
-				tx.executeSql(query);
-			}, function(error) {
-
-				return reject({
-					status: 'error',
-					message: 'Transaction ERROR: ' + error.message
-				});
-
-			}, function() {
-
-				return resolve({
-					status: 'success'
-				});
-			});
-		});
-	}
-
-	private insertMedoc(db, callback) {
-
-		const query = "INSERT INTO medicaments (name) VALUES (?);";
-
-		db.transaction(function(tx) {
-
-			tx.executeSql(query, ['ACETYLLEUCINE BIOGARAN 500 mg, comprimé']);
-
-		}, function(error) {
-
-			console.log();
-
-			callback({
-				status:'error',
-				message: 'Transaction ERROR: ' + error.message
-			});
-
-		}, function() {
-
-			console.log('Populated database OK');
-
-			callback({
-				status:'success',
-				data: {}
-			});
 		});
 	}
 

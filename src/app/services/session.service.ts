@@ -27,23 +27,23 @@ export class SessionService {
 	/*       Theme        */
 	/**********************/
 
-		themeExists() {
+		themeExists() : boolean {
 			return localStorage.getItem("theme") !== null;
 		}
 
-		getTheme() {
+		getTheme() : string {
 			return localStorage.getItem('theme');
 		}
 
 		setTheme(theme) {
-			return localStorage.setItem('theme', theme);
+			localStorage.setItem('theme', theme);
 		}
 
 	/**********************/
 	/*   Recent research  */
 	/**********************/
 
-		recentResearchExists() {
+		recentResearchExists() : boolean {
 			return this.issetItem('recentResearch');
 		}
 
@@ -60,7 +60,7 @@ export class SessionService {
 			return [];
 		}
 
-		addRecentResearchElement(element) {
+		addRecentResearchElement(element: any) {
 
 			const recentResearch = this.getRecentResearch();
 			recentResearch.push(element);
@@ -71,11 +71,11 @@ export class SessionService {
 	/*      Firstname     */
 	/**********************/
 
-		firstnameExists() {
+		firstnameExists(): boolean { 
 			return this.issetItem('firstname');
 		}
 
-		getFirstname() {
+		getFirstname(): string {
 			return localStorage.getItem('firstname');
 		}
 
@@ -87,7 +87,7 @@ export class SessionService {
 	/*      Maj Items     */
 	/**********************/
 
-		getLastMajVersion() {
+		getLastMajVersion(): string {
 			return localStorage.getItem('lastMajVersion');
 		}
 
@@ -95,23 +95,23 @@ export class SessionService {
 			localStorage.setItem('lastMajVersion', element);
 		}
 
-		getCurrentApiVersion() {
+		getCurrentApiVersion(): string {
 			return localStorage.getItem('currentApiVersion');
 		}
 
 		setCurrentApiVersion(element) {
-			return localStorage.setItem('currentApiVersion', element);
+			localStorage.setItem('currentApiVersion', element);
 		}
 
 		setNextProposalUpdate(element) {
 			localStorage.setItem('nextProposalUpdate', element);
 		}
 
-		getNextProposalUpdate() {
+		getNextProposalUpdate(): string {
 			return localStorage.getItem('nextProposalUpdate');
 		}
 
-		getWaitForProposal() {
+		getWaitForProposal(): string {
 			return localStorage.getItem('waitForProposal');
 		}
 

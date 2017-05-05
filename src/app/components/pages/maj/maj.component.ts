@@ -6,6 +6,7 @@ import { DBService } from '../../../services/db.service';
 import { SessionService } from '../../../services/session.service';
 
 import Medoc from '../../../classes/medoc';
+import Error from '../../../classes/error';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -35,10 +36,10 @@ declare var Connection: any;
 export class MajPage {
 	@Output() updateMajStatus = new EventEmitter();
 	medocs			: 		Medoc[];
-	majDone			: 		boolean;
+	majDone			: 		boolean 	= false;
 	majStarted 		: 		boolean 	= false;
-	hello			:		string;
-	theme = "default";
+	hello			:		string 		= "";
+	theme 			: 		string 		= "default";
 	text 			: 		string 		= "Une mise à jour est disponible";
 
 	constructor(public platform: Platform, private apiService: ApiService, private dbService: DBService, private sessionService: SessionService) {
@@ -94,8 +95,8 @@ export class MajPage {
 						});
 					});
 
-	        	}).catch(() => {
-	        		console.log('not on wifi');
+	        	}).catch((err: Error) => {
+	        		console.log(err);
 	        	});
 	        });
 
@@ -131,11 +132,11 @@ export class MajPage {
 		return datas;
 	}
 
-	checkNetwork() {
+	checkNetwork() : Promise<any> {
 
 		return new Promise((resolve, reject) => {
 
-		if(navigator && navigator.connection) {
+			if(navigator && navigator.connection) {
 
 		        const networkState = navigator.connection.type;
 		        const states = {};
@@ -150,15 +151,23 @@ export class MajPage {
 		        states[Connection.NONE]     = 'No network connection';
 
 		        if(networkState === Connection.WIFI) {
-		        	console.log('is wifi');
-		        	return resolve();
+
+		        	return resolve({
+		        		status: "success",
+		        		data: {}
+		        	});
 		        }
 
-			} else {
-				console.log("You are not on a device which can detect you Internet connection");
+		        return reject({
+					status: "error",
+					message : "Not on WIFI"
+				});
 			}
 
-			return reject();
+			return reject({
+				status: "error",
+				message : "You are not on a device which can detect you Internet connection"
+			});
 		});
     }
 
