@@ -2,6 +2,10 @@ export class SessionService {
 
 	constructor() {}
 
+	issetItem(item) {
+		return localStorage.getItem(item) !== null && localStorage.getItem(item) !== "null";
+	}
+
 	/**********************/
 	/*     Search type    */
 	/**********************/
@@ -48,7 +52,22 @@ export class SessionService {
 		}
 
 		getRecentResearch() {
-			return JSON.parse(localStorage.getItem("recentResearch"));
+
+			if(this.issetItem("recentResearch")) {
+				console.log(localStorage.getItem("recentResearch"));
+				return JSON.parse(localStorage.getItem("recentResearch"));
+			}
+
+			return [];
+		}
+
+		addRecentResearchElement(element) {
+
+			const recentResearch = this.getRecentResearch();
+			console.log(recentResearch);
+
+			recentResearch.push(element);
+			this.setRecentResearch(JSON.stringify(recentResearch));
 		}
 
 	/**********************/

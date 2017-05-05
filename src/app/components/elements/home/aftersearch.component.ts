@@ -66,7 +66,7 @@ export class AftersearchComponent {
 		this.apiService.getMedocs(1000).subscribe(medocs => {
 			this.elements = medocs.json();
 
-			for(var element of this.elements) {
+			for(const element of this.elements) {
 
 				if(this.propos.length >= 10) break;
 

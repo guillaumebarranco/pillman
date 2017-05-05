@@ -207,6 +207,9 @@ export class HomePage {
 
 		public changeResearchDone(element) {
 			this.medoc = element;
+
+			this.sessionService.addRecentResearchElement(element);
+
 			this.showAllEffects = false;
 			this.researchDone = true;
 		}
