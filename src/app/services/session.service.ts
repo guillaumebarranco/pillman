@@ -3,7 +3,7 @@ export class SessionService {
 	constructor() {}
 
 	issetItem(item) {
-		return localStorage.getItem(item) !== null && localStorage.getItem(item) !== "null";
+		return typeof localStorage.getItem(item) !== "undefined" && localStorage.getItem(item) !== null && localStorage.getItem(item) !== "null";
 	}
 
 	/**********************/
@@ -44,7 +44,7 @@ export class SessionService {
 	/**********************/
 
 		recentResearchExists() {
-			return localStorage.getItem("recentResearch") !== null;
+			return this.issetItem('recentResearch');
 		}
 
 		setRecentResearch(element) {
@@ -54,7 +54,6 @@ export class SessionService {
 		getRecentResearch() {
 
 			if(this.issetItem("recentResearch")) {
-				console.log(localStorage.getItem("recentResearch"));
 				return JSON.parse(localStorage.getItem("recentResearch"));
 			}
 
@@ -64,8 +63,6 @@ export class SessionService {
 		addRecentResearchElement(element) {
 
 			const recentResearch = this.getRecentResearch();
-			console.log(recentResearch);
-
 			recentResearch.push(element);
 			this.setRecentResearch(JSON.stringify(recentResearch));
 		}
@@ -75,7 +72,7 @@ export class SessionService {
 	/**********************/
 
 		firstnameExists() {
-			return typeof localStorage.getItem('firstname') !== "undefined" && localStorage.getItem('firstname') !== null;
+			return this.issetItem('firstname');
 		}
 
 		getFirstname() {

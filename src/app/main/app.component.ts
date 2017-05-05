@@ -35,12 +35,14 @@ export class AppComponent {
 
         ngOnInit() {
 
-            console.log('before check maj');
-
             this.checkMaj();
 
             this.medoc = {
-                name: ''
+                name: '',
+                cis: '',
+                dci: '',
+                effects: '',
+                forme: ''
             };
 
             this.apiService.getAppDatas().subscribe((response) => {
@@ -69,7 +71,6 @@ export class AppComponent {
         // Received by Recent Component
         medocChange(medoc) {
             this.medoc = medoc;
-            console.log('this medoc', this.medoc);
             this.currentPage = "home";
         }
 

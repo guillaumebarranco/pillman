@@ -15,13 +15,12 @@ export class ApiService {
 		});
 	}
 
-	init(callback) {
-		var env = "dev";
+	private init(callback) {
+		const env = "dev";
 
 		this.getBaseUrl().subscribe((response) => {
 
-			response = response.json();
-			this.baseUrl = response[env].apiUrl;
+			this.baseUrl = response.json()[env].apiUrl;
 
 			if(callback) callback();
 		});
@@ -53,14 +52,13 @@ export class ApiService {
 	public getLastVersion() : Observable<Response> {
 		// return this.makeApiCall("?function=getMedocsVersion");
 		return this.http.get("http://92.222.34.194:8181/version");
-
 	}
 
 	/****************/
 	/* LOCAL ASSETS */
 	/****************/
 
-	public getBaseUrl() : Observable<Response> {
+	private getBaseUrl() : Observable<Response> {
 		return this.http.get('assets/config/config.json');
 	}
 

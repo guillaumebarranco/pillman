@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 
 import { ApiService } from '../../../services/api.service';
 import { SessionService } from '../../../services/session.service';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
 	selector: 'page-home',
 	templateUrl: './home.html',
-	providers: [ApiService, SessionService],
+	providers: [ApiService, SessionService, UtilService],
 	styles: []
 })
 
@@ -26,7 +27,7 @@ export class HomePage {
 
 	labos						: string[];
 
-	constructor(private apiService: ApiService, private sessionService: SessionService) {
+	constructor(private apiService: ApiService, private sessionService: SessionService, private utilService: UtilService) {
 
 		this.setSearchType();
 		this.elements = [];
@@ -175,29 +176,7 @@ export class HomePage {
 		}
 
 		private setLabos() {
-
-			this.labos = [
-				"ISOMED",
-				"CRISTERS",
-				"TEVA",
-				"BIOGARAN",
-				"MYLAN",
-				"ALMUS",
-				"RPG",
-				"ARROW",
-				"EVOLUGEN",
-				"SANDOZ",
-				"QUALIMED",
-				"EG",
-				"ZYDUS",
-				"ZENTIVA",
-				"RATIOPHARM",
-				"RANBAXY",
-				"SET",
-				"PHR",
-				"LAB",
-				"PHARMA"
-			];
+			return this.utilService.getLabos();
 		}
 
 		public updateSearchType() {

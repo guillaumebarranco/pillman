@@ -100,4 +100,30 @@ export class UtilService {
 
         return {x: 0, y:0, z: 0};
     }
+
+    public getLabos() {
+
+        return [
+            "ISOMED",
+            "CRISTERS",
+            "TEVA",
+            "BIOGARAN",
+            "MYLAN",
+            "ALMUS",
+            "RPG",
+            "ARROW",
+            "EVOLUGEN",
+            "SANDOZ",
+            "QUALIMED",
+            "EG",
+            "ZYDUS",
+            "ZENTIVA",
+            "RATIOPHARM",
+            "RANBAXY",
+            "SET",
+            "PHR",
+            "LAB",
+            "PHARMA"
+        ];
+    }
 }

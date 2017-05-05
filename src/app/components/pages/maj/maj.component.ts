@@ -73,32 +73,29 @@ export class MajPage {
 
 			this.platform.ready().then(() => {  
 
-	        	this.checkNetwork((response) => {
+	        	this.checkNetwork().then(() => {
 
-	        		if(response) {
+					this.majStarted = true;
+					this.majDone = false;
+					this.medocs = [];
 
-						this.majStarted = true;
-						this.majDone = false;
-						this.medocs = [];
+					console.log('begin maj');
 
-						console.log('begin maj');
+					this.getMedocs().then((medocs) => {
 
-						this.getMedocs().then((medocs) => {
+						this.dbService.makeMaj(medocs).then((response) => {
 
-							this.dbService.makeMaj(medocs, (response) => {
+							this.medocs = response;
+							this.majDone = true;
 
-								this.medocs = response;
-								this.majDone = true;
+							this.sessionService.setLastMajVersion(this.sessionService.getCurrentApiVersion())
 
-								this.sessionService.setLastMajVersion(this.sessionService.getCurrentApiVersion())
-
-								console.log('end maj', this.medocs);
-							});
+							console.log('end maj', this.medocs);
 						});
+					});
 
-					} else {
-						console.log('not on wifi');
-					}
+	        	}).catch(() => {
+	        		console.log('not on wifi');
 	        	});
 	        });
 
@@ -118,12 +115,9 @@ export class MajPage {
 
 		this.sessionService.setNextProposalUpdate(timestamp.toString());
 		this.sessionService.setWaitForProposal(wait.toString());
-
-		console.log(localStorage.getItem('nextProposalUpdate'));
-		console.log(localStorage.getItem('waitForProposal'));
 	}
 
-	getMedocs() {
+	getMedocs() : Promise<Medoc[]> {
 
 		return new Promise((resolve, reject) => {
 
@@ -137,32 +131,35 @@ export class MajPage {
 		return datas;
 	}
 
-	checkNetwork(callback) {
+	checkNetwork() {
+
+		return new Promise((resolve, reject) => {
 
 		if(navigator && navigator.connection) {
 
-	        const networkState = navigator.connection.type;
-	        const states = {};
+		        const networkState = navigator.connection.type;
+		        const states = {};
 
-	        states[Connection.UNKNOWN]  = 'Unknown connection';
-	        states[Connection.ETHERNET] = 'Ethernet connection';
-	        states[Connection.WIFI]     = 'WiFi connection';
-	        states[Connection.CELL_2G]  = 'Cell 2G connection';
-	        states[Connection.CELL_3G]  = 'Cell 3G connection';
-	        states[Connection.CELL_4G]  = 'Cell 4G connection';
-	        states[Connection.CELL]     = 'Cell generic connection';
-	        states[Connection.NONE]     = 'No network connection';
+		        states[Connection.UNKNOWN]  = 'Unknown connection';
+		        states[Connection.ETHERNET] = 'Ethernet connection';
+		        states[Connection.WIFI]     = 'WiFi connection';
+		        states[Connection.CELL_2G]  = 'Cell 2G connection';
+		        states[Connection.CELL_3G]  = 'Cell 3G connection';
+		        states[Connection.CELL_4G]  = 'Cell 4G connection';
+		        states[Connection.CELL]     = 'Cell generic connection';
+		        states[Connection.NONE]     = 'No network connection';
 
-	        if(networkState === Connection.WIFI) {
-	        	console.log('is wifi');
-	        	return callback(true);
-	        }
+		        if(networkState === Connection.WIFI) {
+		        	console.log('is wifi');
+		        	return resolve();
+		        }
 
-		} else {
-			console.log("You are not on a device which can detect you Internet connection");
-		}
+			} else {
+				console.log("You are not on a device which can detect you Internet connection");
+			}
 
-		return callback(false);
+			return reject();
+		});
     }
 
 	updateMaj() {

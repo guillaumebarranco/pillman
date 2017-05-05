@@ -37,29 +37,29 @@ export class AftersearchComponent {
 		}, 500);
 	}
 
-	reinitResearch(element) {
+	private reinitResearch(element) {
 		this.researchDone = element;
 		this.found = false;
 		this.propos = [];
 		this.launchMatch();
 	}
 
-	updateResearchDone(element) {
+	private updateResearchDone(element) {
 		this.changeResearchDone.emit(element);
 		this.found = true;
 		this.propos = [];
 	}
 
-	goBackHome() {
+	private goBackHome() {
 		this.changeResearchDone.emit({});
 		this.found = true;
 		this.propos = [];
 	}
 
-	launchMatch() {
+	private launchMatch() {
 
 		const which = this.search.substr(0,1).toLowerCase();
-		
+
 		// this.dbService.searchMedoc(which).then(medocs => {
 			// this.elements = medocs;
 
