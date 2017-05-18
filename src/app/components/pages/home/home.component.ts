@@ -96,12 +96,7 @@ export class HomePage {
 		}
 
 		openFilter() {
-
-			if(this.popupFilter) {
-				this.popupFilter = false;
-			} else {
-				this.popupFilter = true;
-			}
+			this.popupFilter = this.popupFilter ? false : true;
 		}
 
 	/*********************/

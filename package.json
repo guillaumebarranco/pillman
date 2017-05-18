@@ -22,6 +22,7 @@
     "@angular/platform-server": "4.0.0",
     "@ionic-native/core": "^3.4.4",
     "@ionic-native/file": "^3.4.4",
+    "@ionic-native/network": "^3.9.2",
     "@ionic/storage": "2.0.0",
     "angular2-ui-switch": "^1.2.0",
     "angularfire2": "^2.0.0-beta.7",

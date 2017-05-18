@@ -60,11 +60,11 @@ export class AftersearchComponent {
 
 		const which = this.search.substr(0,1).toLowerCase();
 
-		// this.dbService.searchMedoc(which).then(medocs => {
-			// this.elements = medocs;
+		this.dbService.searchMedoc(this.search).then(medocs => {
+			this.elements = medocs;
 
-		this.apiService.getMedocs(1000).subscribe(medocs => {
-			this.elements = medocs.json();
+		// this.apiService.getMedocs(1000).subscribe(medocs => {
+		// 	this.elements = medocs.json();
 
 			for(const element of this.elements) {
 

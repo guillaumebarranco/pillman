@@ -7,7 +7,12 @@ import { SessionService } from '../../../services/session.service';
 @Component({
 	selector: 'page-options',
 	templateUrl: './options.html',
-	providers: [UtilService, ApiService, SessionService]
+	providers: [UtilService, ApiService, SessionService],
+	styles: [`
+		select {
+			color: #000;
+		}
+	`]
 })
 
 export class OptionsPage {

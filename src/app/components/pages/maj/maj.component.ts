@@ -141,6 +141,15 @@ export class MajPage {
 		        const networkState = navigator.connection.type;
 		        const states = {};
 
+		        // temporary
+		        if(typeof Connection === "undefined") {
+
+		        	return resolve({
+		        		status: "success",
+		        		data: {}
+		        	});
+		    	}
+
 		        states[Connection.UNKNOWN]  = 'Unknown connection';
 		        states[Connection.ETHERNET] = 'Ethernet connection';
 		        states[Connection.WIFI]     = 'WiFi connection';

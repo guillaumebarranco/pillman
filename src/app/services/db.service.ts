@@ -114,14 +114,14 @@ export class DBService {
 		});
 	}
 
-	public searchMedoc(first) {
+	public searchMedoc(search) {
 
 		return new Promise((resolve, reject) => {
 
 			this.getDB().then((db: SQLite) => {
 
 				const elements = 'name, cis, dci, effects, forme';
-				const querySelect = 'SELECT * FROM medicaments';
+				const querySelect = 'SELECT * FROM medicaments WHERE name LIKE "%'+search+'"';
 
 				db.transaction(function(tx) {
 

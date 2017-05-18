@@ -15,7 +15,10 @@
 
 	<div *ngIf="!majDone && majStarted">Mise à jour en cours...</div>
 
-	<ul>
-		<li *ngFor="let medoc of medocs">{{medoc.name}}</li>
-	</ul>
+	<div *ngIf="majDone">
+		<p>Mise à jour finie !</p>
+		<p>{{medocs.length}} médicaments ajoutés</p>
+		<button (click)="makeMaj(false)">Retour à l'accueil</button>
+	</div>
+
 </div>
